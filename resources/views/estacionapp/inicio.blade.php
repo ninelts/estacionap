@@ -22,7 +22,9 @@
 </head>
 
 <body class="animated fadeIn slower">
-
+@if(session('status'))
+<h1>{{session('status')}}</h1>
+@endif
   <div id="cabecera">
     <div class="video">
 

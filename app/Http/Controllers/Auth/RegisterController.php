@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-       public function register(Request $request)
+    public function register(Request $request)
     {
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));   //metodo para registrar Usuario se crea el evente registrar usuario
@@ -74,13 +74,13 @@ class RegisterController extends Controller
         'email.email' => 'El campo correo debe ser una dirección de correo válida.',
 
         'txtTelefono.required'      =>'El campo telefono es obligatorio',
-        'txtTelefono.digits'        =>'El campo telefono debe contener 9 digitos',
-        'txtTelefono.integer'       =>'Este campo solo acepta digitos',
+        'txtTelefono.min'           =>'El campo telefono debe contener 9 digitos',
+        'txtTelefono.numeric'       =>'EL campo telefono solo acepta numeros',
 
-        'password.required'    =>'El campo contraseña es obligatorio',
-        'password.min'         =>'El campo contraseña debe contener 8 caracteres como minimo',
-        'password.required'        =>'El campo contraseña es obligatorio',
-        'password.confirmed' => 'El campo confirmación de contraseña no coincide',
+        'password.required'         =>'El campo contraseña es obligatorio',
+        'password.min'              =>'El campo contraseña debe contener 6 caracteres como minimo',
+        'password.regex'            =>'El campo contraseña Debe contener Un Caracter Mayuscula,Numerico,Simbolo,minusculas',
+        'password.confirmed'        => 'El campo confirmación de contraseña no coincide',
 
         'txtNacimiento.required'    =>'El campo fecha es obligatorio'
     ); 
@@ -92,7 +92,11 @@ class RegisterController extends Controller
         'txtTelefono' => ['required', 'numeric', 'min:8'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'txtNacimiento' => ['required'],
-        'password' => ['required', 'string', 'min:8','confirmed'],
+        'password' => ['required', 
+        'min:6', 
+        'regex:"^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$"', 
+        'confirmed']
+        ,
     ], $messages);
 }
 
