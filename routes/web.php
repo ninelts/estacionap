@@ -11,16 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('estacionapp.inicio');
-})->name('inicio')->middleware('guest');
-
 Auth::routes(['verify' => true]);
+Route::get('/', function () {return view('estacionapp.inicio');})->name('inicio')->middleware('guest');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/registro', function() {
-    return view('estacionapp.registro.registro_usuario');
-})->name('registro');
-
-
+Route::get('/registro','Auth\RegisterController@index')->name('registro');
 Route::get('/conductor','conductorController@index')->name('conductor');
+

@@ -1,4 +1,4 @@
-<!doctype html>
+!doctype html>
 <html class="no-js" lang="">
 
 <head>
@@ -22,9 +22,15 @@
 </head>
 
 <body class="animated fadeIn slower">
+ @if(session('alert'))
+<h1>{{session('alert')}} </h1>
+@endif 
+
 @if(session('status'))
 <h1>{{session('status')}}</h1>
 @endif
+
+
   <div id="cabecera">
     <div class="video">
 

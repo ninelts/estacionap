@@ -11,10 +11,9 @@
     <div class="input-field s12 menu-reser">
         <a href="#modal1" class="boton modal-trigger" onclick="ocultarBotones()"><i class="fas fa-qrcode"></i> <span>Generar Reserva</span> </a>
 
-        <a href="" class="boton"><i class="fas fa-search"></i> <span>Mostrar QR</span> </a>
+
 
         <a href="" class="boton"><i class="fas fa-search"></i> <span>Mostrar QR</span> </a>
-
         <a href="#" class="boton"><i class="fas fa-money-check-alt"></i> <span>Pagar Servicio</span> </a>
     </div>
 </div>
@@ -22,7 +21,7 @@
     <div class="modal-content">
         <h4>Seleccione Tipo Reserva</h4>
         <div class="input-field s12 menu-reser-modal">
-            <a href="#modal1" class="boton modal-trigger"><i class="fas fa-qrcode"></i> <span>Express</span> </a>
+            <a href="#modal1" class="{{route('')}}"><i class="fas fa-qrcode"></i> <span>Express</span> </a>
             <a href="#" class="boton"><i class="fas fa-search"></i> <span>Diaria</span> </a>
             <a href="#" class="boton"><i class="fas fa-money-check-alt"></i> <span>Mensual</span> </a>
         </div>

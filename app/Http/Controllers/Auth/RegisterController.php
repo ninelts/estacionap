@@ -31,6 +31,16 @@ class RegisterController extends Controller
      *
      * @var string
      */
+
+
+
+
+    public function index () {
+
+        return view('estacionapp.registro.registro_usuario');
+    }
+
+
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
