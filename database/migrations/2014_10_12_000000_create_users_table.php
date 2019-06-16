@@ -6,6 +6,10 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
+
+
+
+    
     /**
      * Run the migrations.
      *
@@ -23,7 +27,6 @@ class CreateUsersTable extends Migration
             $table->string('password',255);
             $table->integer('phone')->length(9)->unsigned();
             $table->date('born');
-            $table->integer('user_type')->length(9)->nullable()->unsigned();
             $table->rememberToken();
             $table->timestamps();
       

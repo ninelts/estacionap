@@ -41,6 +41,9 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+
     protected function sendFailedLoginResponse(Request $request)
     {
         return redirect()->back()->with('status','Error al iniciar session');
