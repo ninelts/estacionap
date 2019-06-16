@@ -1,8 +1,9 @@
-@include('layouts.head')
-<nav>
+@extends('layouts.layout')
+<!-- <nav>
     <a href="#" class="brand-logo">Smart-Parking</a>
     <a href="{{route('inicio')}}" class="back-page left"><i class="fas fa-arrow-left"></i></a>
-</nav>
+</nav> -->
+@section('content')
 <section class="container section animated fadeIn slower">
 
 
@@ -79,11 +80,8 @@
                 @endforeach
             </div>
             <div class="input-field col s6">
-                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                <div class="col-md-6">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
-                </div>
+                <input id="password-confirm" type="password" class="validate" name="password_confirmation" >
+                <label for="password-confirm">{{ __('Confirm Password') }}</label>
 
             </div>
             <div class="input-field col s12">
@@ -93,4 +91,4 @@
 
     </form>
 </section>
-@include('layouts.footer')
+@endsection

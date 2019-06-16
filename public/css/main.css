@@ -15,7 +15,7 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
-html {
+   html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
@@ -111,9 +111,10 @@ textarea {
 
  :root {
     --primario: #ffcc00;
-    --secundario: #a2a2a2;
+    --secundario: #455a64;
     --tercero: #000000;
     --texto1: #ffffff;
+    --sombra: #cfd8dc;
     --texto-primario: 'Oswald', sans-serif;
     --texto-secundario: 'Port Lligat Sans', sans-serif;
 }
@@ -143,6 +144,27 @@ html {
     margin-top: 2rem;
     font-family: var(--texto-secundario);
     font-size: 1.5rem;
+}
+
+.boton-submit {
+    background-color: var(--secundario);
+    padding: .8rem;
+    text-align: center;
+    color: var(--texto1);
+    border: none;
+    border-radius: 5px;
+    transition: .5s ease-in-out;
+    display: inline-block;
+    width: 70%;
+    margin-top: 2rem;
+    font-family: var(--texto-secundario);
+    font-size: 1.5rem;
+    box-shadow: 5px 5px 2px var(--sombra);
+}
+
+.boton-submit:hover {
+    cursor: pointer;
+    background-color: var(--primario);
 }
 
 .boton:hover {
@@ -177,9 +199,10 @@ nav {
     font-family: var(--texto-primario);
 }
 
-.material-icons {
+
+/* .material-icons {
     color: var(--secundario) !important;
-}
+} */
 
 .material-icons.active {
     color: var(--primario) !important;
@@ -229,6 +252,12 @@ label input[type="checkbox"]:checked+span:not(.lever):before {
     box-shadow: 0 1px 0 0 var(--secundario) !important;
 }
 
+.input-field button[type=submit]:focus {
+    border: none;
+    background-color: var(--primario);
+    box-shadow: none;
+}
+
 
 /******* INICIO SESION ********/
 
@@ -267,10 +296,10 @@ body {
 }
 
 
-
-
 /****** MODAL LOGIN ******/
 
+
+/* 
 .modal {
     width: 90%;
     background-color: var(--secundario) opacity(1) !important;
@@ -306,7 +335,7 @@ body {
 .form-login .input-field .boton {
     width: 100%;
     border: 1px solid var(--primario);
-}
+}*/
 
 .nuevo-registro {
     display: flex;
@@ -337,9 +366,10 @@ form .link:hover {
     color: var(--primario);
 }
 
-.mensaje-error{
+.mensaje-error {
     color: var(--texto1);
 }
+
 
 /********* RESERVAS CONDUCTOR ***************/
 
@@ -423,7 +453,13 @@ form .link:hover {
     width: 50%;
     background-color: var(--texto1);
 }
-
+/*********** SLIDENAV ****************************/
+.btn-salir{
+    background-color: var(--primario);
+    border: none;
+    display: block;
+    padding-left: 25px; 
+}
 
 /*********SCANNER QR ***********/
 

@@ -1,6 +1,6 @@
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Smart-Parking</a>
+    <a href="#" class="brand-logo">EstacionaPP</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a href="sass.html">Sass</a></li>
       @auth
@@ -12,10 +12,12 @@
      <li><a href="badges.html">Components</a></li>
      <li><a href="collapsible.html">JavaScript</a></li>
    </ul>
+   @auth
    <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-   <a href="#" class="back-page left"><i class="fas fa-arrow-left"></i></a>
+   @endauth
+   <a href="{{route('inicio')}}" class="back-page left"><i class="fas fa-arrow-left"></i></a>
  </div>
-
+  
 </nav>
 <ul id="slide-out" class="sidenav">
   <li><div class="user-view">

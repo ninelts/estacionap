@@ -23,21 +23,27 @@
 <body>
   <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Smart-Parking</a>
+    <a href="#" class="brand-logo">EstacionaPP</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
 
-      @auth
-      <li><a href="sass.html">{{ Auth::user()->name }}</a></li>
-      @endauth
-      <form id="logout-form" action="{{ route('logout') }}" method="POST">
-       @csrf
-       <input type="submit" name="Salir" value="salir">
-     </form>
+  @auth
      <li><a href="badges.html">Components</a></li>
      <li><a href="collapsible.html">JavaScript</a></li>
+  @endauth
+      @auth
+      <li><a href="sass.html">{{ Auth::user()->name }}</a></li>
+      <li>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST">
+       @csrf
+  <li><a href="#!"><input class="waves-effect btn-salir" type="submit" name="Salir" value="Cerrar Sesión"></a></li>
+  </form>
+  </li>
+      @endauth  
    </ul>
+  @auth
    <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-   <a href="#" class="back-page left"><i class="fas fa-arrow-left"></i></a>
+  @endauth 
+   <a href="{{route('inicio')}}" class="back-page left"><i class="fas fa-arrow-left"></i></a>
  </div>
 
 </nav>
@@ -57,6 +63,15 @@
   <li><div class="divider"></div></li>
   <li><a class="subheader">Subheader</a></li>
   <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+  @auth
+  <li><div class="divider"></div></li>
+  <li>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST">
+       @csrf
+  <input class="waves-effect btn-salir" type="submit" name="Salir" value="Cerrar Sesión">
+  </form>
+  </li>
+      @endauth 
 </ul>
 
 

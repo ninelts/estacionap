@@ -33,12 +33,12 @@
 
 
     <div class="botones">
-      <a href="#login" class="boton modal-trigger" onclick="ocultarBotones()">Iniciar Sesión</a>
+      <a href="{{route('login')}}" class="boton">Iniciar Sesión</a>
       <a href="{{route('registro')}}" class="boton">Registrarse</a>
     </div>
 
     <!-- MODAL INICIAR SESION -->
-    <div class="">
+<!--     <div class="">
       <div class="modal  animated fadeInLeft" id="login">
 
         <div class="modal-content center">
@@ -72,12 +72,12 @@
               <p>¿Nuevo en la App?</p>
               <a href="{{route('registro')}}" class="link">Registrate</a>
             </label>
-            <a href="{{ route('password.request') }}" class="link">¿Olvido su Contraseña?</a>
+            <a href="" class="link">¿Olvido su Contraseña?</a>
           </form>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

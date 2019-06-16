@@ -24,3 +24,9 @@ Route::get('/registro', function() {
 
 
 Route::get('/conductor','conductorController@index')->name('conductor');
+
+//RUTAS PRUEBAS
+
+Route::get('login', function() {
+    return view('estacionapp.login');
+})->name('login');  
