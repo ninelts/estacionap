@@ -17,4 +17,5 @@ Route::get('/', function () {return view('estacionapp.inicio');})->name('inicio'
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/registro','Auth\RegisterController@index')->name('registro');
 Route::get('/conductor','conductorController@index')->name('conductor');
+Route::get('/Qr', 'CrearqrController@index')->name('QR');
 

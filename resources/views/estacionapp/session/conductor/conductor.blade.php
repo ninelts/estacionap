@@ -3,9 +3,13 @@
 
 @section('content')
 
+        @if(session('QR'))
+        <h3>Estado Reserva</h3>
+
+        <img src="{{session('QR')}}">  
+        @endif
 <div class="container section  animated fadeIn slower">
     <div class="info-misreservas">
-        <h3>Estado Reserva</h3>
         <h4>No existe reserva</h4>
     </div>
     <div class="input-field s12 menu-reser">
@@ -21,7 +25,7 @@
     <div class="modal-content">
         <h4>Seleccione Tipo Reserva</h4>
         <div class="input-field s12 menu-reser-modal">
-            <a href="#modal1" class="{{route('')}}"><i class="fas fa-qrcode"></i> <span>Express</span> </a>
+            <a href="{{route('QR')}}"    class="fas fa-qrcode"></i> <span>Express</span> </a>
             <a href="#" class="boton"><i class="fas fa-search"></i> <span>Diaria</span> </a>
             <a href="#" class="boton"><i class="fas fa-money-check-alt"></i> <span>Mensual</span> </a>
         </div>
