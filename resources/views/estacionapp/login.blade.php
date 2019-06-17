@@ -6,11 +6,13 @@
         @csrf
             <h1>Iniciar Sesion</h1>
             @if(session('status'))
-            <div class="mensaje-error">
-                <p class="center">{{session('status')}}</p>
-            </div>
+                <div class="card-error red lighten-2">
+                    <div class="card-content white-text">
+                    <p class="center">{{session('status')}}</p>
+                    </div>
+                </div>
             @endif
-            <div class="row">
+            <div class="row inicio-sesion">
 
                 <div class="input-field col s12">
                     <i class="material-icons prefix blue-grey-text darken-2-text">account_circle</i>

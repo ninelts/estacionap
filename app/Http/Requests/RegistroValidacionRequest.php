@@ -31,7 +31,7 @@ class RegistroValidacionRequest extends FormRequest
             'password' => 'required|min:8|confirmed',
             'txtTelefono'   => 'required|digits:9',
             'txtNacimiento' => 'required|date',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
             //
         ];
     }

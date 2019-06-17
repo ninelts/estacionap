@@ -15,7 +15,7 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
-   html {
+html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
@@ -147,25 +147,26 @@ html {
 }
 
 .boton-submit {
-    background-color: var(--secundario);
+    background-color: var(--primario);
     padding: .8rem;
     text-align: center;
     color: var(--texto1);
     border: none;
     border-radius: 5px;
     transition: .5s ease-in-out;
-    display: inline-block;
-    width: 70%;
+    display: block;
+    width: 100%;
     margin-top: 2rem;
     font-family: var(--texto-secundario);
     font-size: 1.5rem;
     box-shadow: 5px 5px 2px var(--sombra);
 }
 
-.boton-submit:hover {
+
+/* .boton-submit:hover {
     cursor: pointer;
     background-color: var(--primario);
-}
+} */
 
 .boton:hover {
     cursor: pointer;
@@ -252,6 +253,16 @@ label input[type="checkbox"]:checked+span:not(.lever):before {
     box-shadow: 0 1px 0 0 var(--secundario) !important;
 }
 
+.input-field input[type=date].valid {
+    border-bottom: 1px solid var(--secundario) !important;
+    box-shadow: 0 1px 0 0 var(--secundario) !important;
+}
+
+.input-field input[type=password].valid {
+    border-bottom: 1px solid var(--secundario) !important;
+    box-shadow: 0 1px 0 0 var(--secundario) !important;
+}
+
 .input-field button[type=submit]:focus {
     border: none;
     background-color: var(--primario);
@@ -296,46 +307,11 @@ body {
 }
 
 
-/****** MODAL LOGIN ******/
+/****** LOGIN ******/
 
-
-/* 
-.modal {
-    width: 90%;
-    background-color: var(--secundario) opacity(1) !important;
-    border-radius: 1rem !important;
-    height: 100vh !important;
+.inicio-sesion {
+    margin-top: 5rem;
 }
-
-.form-login {
-    padding: 1rem;
-}
-
-.form-login .input-field input {
-    color: var(--texto1) !important;
-    font-size: 1.5rem !important;
-}
-
-.form-login h4 {
-    margin-bottom: 3rem;
-    font-family: var(--texto-primario);
-    color: var(--primario);
-}
-
-.modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    margin: 0;
-    padding: 0;
-    font-family: var(--texto-primario);
-    color: var(--primario);
-}
-
-.form-login .input-field .boton {
-    width: 100%;
-    border: 1px solid var(--primario);
-}*/
 
 .nuevo-registro {
     display: flex;
@@ -370,6 +346,16 @@ form .link:hover {
     color: var(--texto1);
 }
 
+.error-form-registroUsu {
+    font-size: 0.6rem;
+}
+
+.card-error {
+    padding: .2rem;
+    border-radius: .2rem;
+    padding-left: .5rem;
+}
+
 
 /********* RESERVAS CONDUCTOR ***************/
 
@@ -381,7 +367,7 @@ form .link:hover {
 }
 
 .menu-reser a i {
-    font-size: 5rem;
+    font-size: 8rem;
     transition: .2s ease-in-out;
 }
 
@@ -453,13 +439,17 @@ form .link:hover {
     width: 50%;
     background-color: var(--texto1);
 }
+
+
 /*********** SLIDENAV ****************************/
-.btn-salir{
+
+.btn-salir {
     background-color: var(--primario);
     border: none;
     display: block;
-    padding-left: 25px; 
+    padding-left: 25px;
 }
+
 
 /*********SCANNER QR ***********/
 
