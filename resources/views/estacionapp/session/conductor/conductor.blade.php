@@ -4,10 +4,10 @@
 @section('content')
 
         @if(session('QR'))
-        <h3>Estado Reserva</h3>
-
         <img src="{{session('QR')}}">  
+        <h3>Estado Reserva</h3>
         @endif
+
 <div class="container section  animated fadeIn slower">
     <div class="info-misreservas">
         <h4>No existe reserva</h4>

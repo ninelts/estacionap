@@ -27,7 +27,7 @@ class VerificationController extends Controller
      */
     protected $redirectTo = '/conductor';
 
-    /**
+    /**12345678
      * Create a new controller instance.
      *
      * @return void

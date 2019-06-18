@@ -84,8 +84,8 @@ class RegisterController extends Controller
         'email.email' => 'El campo correo debe ser una dirección de correo válida.',
 
         'txtTelefono.required'      =>'El campo telefono es obligatorio',
-        'txtTelefono.min'           =>'El campo telefono debe contener 9 digitos',
         'txtTelefono.numeric'       =>'EL campo telefono solo acepta numeros',
+        'txtTelefono.digits_between'=>'El campo telefono debe contener 9 digitos',
 
         'password.required'         =>'El campo contraseña es obligatorio',
         'password.min'              =>'El campo contraseña debe contener 6 caracteres como minimo',
@@ -97,9 +97,9 @@ class RegisterController extends Controller
 
     return Validator::make($data, [
         'rut' => ['required', 'string', 'min:8','unique:users'],
-        'txtNombre' => ['required', 'string', 'max:255'],
-        'txtApellido' => ['required', 'string', 'min:4'],
-        'txtTelefono' => ['required', 'numeric', 'min:8'],
+        'txtNombre' => ['required', 'alpha', 'max:255'],
+        'txtApellido' => ['required', 'alpha', 'min:4'],
+        'txtTelefono' => ['required', 'numeric', 'digits_between:9,9'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'txtNacimiento' => ['required'],
         'password' => ['required', 
