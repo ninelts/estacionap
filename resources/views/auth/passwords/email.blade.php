@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix blue-grey-text darken-2-text">email</i>
-                    <input id="email" type="email" name="" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}">
+                    <input id="email" type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}">
                     <label for="email">Correo</label>
                     @if($errors->has('email'))
                     <div class="card-error red lighten-2">
@@ -38,7 +38,7 @@
             <div class="row">
 
                 <div class="input-field col s12 center-align">
-                    <button class="boton-submit waves-effect waves-light" type="submit" name="action">Enviar Correo
+                    <button class="boton-submit waves-effect waves-light" type="submit">Enviar Correo
                     </button>
                 </div>
             </div>

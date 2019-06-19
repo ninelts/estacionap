@@ -4,7 +4,7 @@
 <div class="container">
     <h1>Cuenta Usuario</h1>
     <div class="row">
-    <div class="col s12 m6">
+    <div class="col s12">
       <div class="card yellow lighten-4">
         <div class="card-content blue-grey-text darken-2-text">
         @if (session('resent'))

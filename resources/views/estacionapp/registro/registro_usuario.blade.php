@@ -127,7 +127,7 @@
 
             </div>
             <div class="input-field col s12 center-align">
-                <button class="boton-submit waves-effect waves-light" type="submit" name="action">Gurdar
+                <button class="boton-submit waves-effect waves-light" type="submit" name="action">Guardar
             </div>
         </div>
 

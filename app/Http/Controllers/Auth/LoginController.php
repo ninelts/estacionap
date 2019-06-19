@@ -20,6 +20,9 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    public $maxAttempts = 3;
+    public $decayMinutes = 10;
+
      public function username()
     {
         return 'rut';
@@ -41,10 +44,29 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        return redirect()->back()->with('status','Error al iniciar session');
+
+    public function sendFailedLoginResponse(Request $request)
+    {   
+
+
+        $attempts = session()->get('login.attempts', 1); // obtener intentos, default: 0
+        if ($attempts<=2) {
+        session()->put('login.attempts', $attempts + 1); // incrementrar intentos
+        return redirect()->back()->with('status','intento :'.$attempts);
+            
+        }else{
+
+             return redirect()->back()->with('status','Su Cuenta se ha bloqueado temporalmente')->with('status','Su Cuenta se ha bloqueado temporalmente'.$this->decayMinutes.':Minuto');
+        }
+
     }
 
 
+
+
+    protected function authenticated(Request $request, $user)
+    {
+        session()->forget('login.attempts');    //Invacamos a la funcion aunteticado una ves antenticado se manda a olvidar el numero de intentos para la session //
+
+    }
 }
