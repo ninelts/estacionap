@@ -3,14 +3,19 @@
 
 @section('content')
 
-        @if(session('QR'))
-        <img src="{{session('QR')}}">  
-        <h3>Estado Reserva</h3>
-        @endif
 
 <div class="container section  animated fadeIn slower">
     <div class="info-misreservas">
+        
+        @if(session('QR'))
+        
+        <h3>Estado Reserva</h3>
+        <img src="{{session('QR')}}">  
+        
+        @else        
         <h4>No existe reserva</h4>
+        @endif
+
     </div>
     <div class="input-field s12 menu-reser">
         <a href="#modal1" class="boton modal-trigger" onclick="ocultarBotones()"><i class="fas fa-qrcode"></i> <span>Generar Reserva</span> </a>

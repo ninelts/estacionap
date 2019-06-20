@@ -19,8 +19,6 @@ Route::get('/registro','Auth\RegisterController@index')->name('registro');
 Route::get('/conductor','conductorController@index')->name('conductor');
 Route::get('/Qr', 'CrearqrController@index')->name('QR');
 
-<<<<<<< HEAD
-=======
 Route::get('/conductor','conductorController@index')->name('conductor');
 
 //RUTAS PRUEBAS
@@ -28,4 +26,3 @@ Route::get('/conductor','conductorController@index')->name('conductor');
 Route::get('login', function() {
     return view('estacionapp.login');
 })->name('login');  
->>>>>>> vistas
