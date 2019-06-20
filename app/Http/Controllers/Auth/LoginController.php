@@ -19,11 +19,18 @@ class LoginController extends Controller
     |
     */
     use AuthenticatesUsers;
+<<<<<<< HEAD
 
     public $maxAttempts = 3;   // Maximo de intentos
     public $decayMinutes = 10;  // Bloqueo en minutos
  
     public function username()
+=======
+    public $maxAttempts = 3;
+    public $decayMinutes = 10;
+
+     public function username()
+>>>>>>> vistas
     {
         return 'rut'; 
     }
@@ -46,6 +53,10 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
 
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> vistas
     public function sendFailedLoginResponse(Request $request)
     {   
 
@@ -57,7 +68,11 @@ class LoginController extends Controller
             
         }else{
 
+<<<<<<< HEAD
              return redirect()->back()->with('status','Su Cuenta se ha bloqueado temporalmente')->with('status',$this->decayMinutes.':Minuto');
+=======
+             return redirect()->back()->with('status','Su Cuenta se ha bloqueado temporalmente')->with('status','Su Cuenta se ha bloqueado temporalmente'.$this->decayMinutes.':Minuto');
+>>>>>>> vistas
         }
 
     }
@@ -70,4 +85,8 @@ class LoginController extends Controller
         session()->forget('login.attempts');    //Invacamos a la funcion aunteticado una ves antenticado se manda a olvidar el numero de intentos para la session //
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> vistas

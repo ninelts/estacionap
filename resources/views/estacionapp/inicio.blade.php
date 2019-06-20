@@ -39,51 +39,9 @@
 
 
     <div class="botones">
-      <a href="#login" class="boton modal-trigger" onclick="ocultarBotones()">Iniciar Sesión</a>
+      <a href="{{route('login')}}" class="boton">Iniciar Sesión</a>
       <a href="{{route('registro')}}" class="boton">Registrarse</a>
     </div>
-
-    <!-- MODAL INICIAR SESION -->
-    <div class="">
-      <div class="modal  animated fadeInLeft" id="login">
-
-        <div class="modal-content center">
-          <h5 class="modal-close" onclick="mostrarBotones()">X</h5>
-          <form class="form-login" action="{{route('login')}}" method="POST">
-            @csrf
-            <h4>Inicio Sesion</h4>
-              @if(session('status'))
-                <div class="mensaje-error">
-                  <p class="center">{{session('status')}}</p>
-                </div> 
-              @endif
-            <div class="input-field s12">
-              <i class="material-icons prefix">persona</i>
-              <input name="rut" type="text" id="username">
-              <label for="username">Nombre Usuario</label>
-            </div>
-            <div class="input-field s12">
-              <i class="material-icons prefix">lock</i>
-              <input name="password" type="password" id="password">
-              <label for="password">Contraseña</label>
-            </div>
-            <label class="col s12">
-              <input type="checkbox" id="check" />
-              <span>Recordarme</span>
-            </label>
-            <div class="input-field s12">
-              <input type="submit" value="Iniciar" class="boton"  name="">
-            </div>
-            <label class="nuevo-registro">
-              <p>¿Nuevo en la App?</p>
-              <a href="{{route('registro')}}" class="link">Registrate</a>
-            </label>
-            <a href="{{ route('password.request') }}" class="link">¿Olvido su Contraseña?</a>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
