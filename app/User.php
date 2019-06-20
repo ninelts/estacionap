@@ -30,7 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function authorizeRoles($roles)    
     {
 
-        abort_unless($this->hasRole($roles), 401);  //Funcion abort_unless lanza una excepción HTTP si una expresión booleana determinada se evalúa como false   
+        abort_unless($this->hasRole($roles),redirect()->route('roles'));  //Funcion abort_unless lanza una excepción HTTP si una expresión booleana determinada se evalúa como false   
         return true;
     }
 

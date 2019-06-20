@@ -35,7 +35,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/conductor';
+    protected $redirectTo = '/Roles';
 
 
     /**
@@ -49,7 +49,6 @@ class LoginController extends Controller
 
     }
 
-<<<<<<< HEAD
     public function sendFailedLoginResponse(Request $request)
     {   
 
@@ -62,20 +61,10 @@ class LoginController extends Controller
         }else{
 
 
-             return redirect()->back()->with('status','Su Cuenta se ha bloqueado temporalmente')->with('status',$this->decayMinutes.':Minuto');
-
-             return redirect()->back()->with('status','Su Cuenta se ha bloqueado temporalmente')->with('status','Su Cuenta se ha bloqueado temporalmente'.$this->decayMinutes.':Minuto');
-
+             return redirect()->back()->with('status','Su Cuenta se ha bloqueado temporalmente')->with('status',$this->decayMinutes.':Minutos');
         }
-
-=======
-
-
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        return redirect()->back()->with('status','Error al iniciar session');
->>>>>>> roles
     }
+
 
 
 
