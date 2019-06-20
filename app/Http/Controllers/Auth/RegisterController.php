@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -118,7 +119,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data )
     {
-        return User::create([
+        $role = Role::where('name', 'usu')->first();
+        $user = User::create([
             'name' => $data['txtNombre'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -128,6 +130,8 @@ class RegisterController extends Controller
             'born' => $data['txtNacimiento'],
 
         ]);
+        $user->roles()->attach($role);  //Funcion para Agregar el rol y el id del usuario en la tabla pivote o muchos a muchos
+         return $user;
     }
 
 }

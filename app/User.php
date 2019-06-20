@@ -11,6 +11,31 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
+    public function roles(){
+        return $this->belongsToMany('App\Role'); //Funcion para relacionar muchos a muchos a la tabla roles
+    }
+
+/*----------------------------------------Validacion ROLES ------------------------------------------------------------------*/
+    public function hasRole($role) //Funcion para validar si el usuario Tiene un Rol establecido
+    {    
+        if ($this->roles()->where('name', $role)->first()) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+    public function authorizeRoles($roles)    
+    {
+
+        abort_unless($this->hasRole($roles), 401);  //Funcion abort_unless lanza una excepción HTTP si una expresión booleana determinada se evalúa como false   
+        return true;
+    }
+
+
+/*------------------------------------------------------------------------------------------------------------------------*/
     /**
      * The attributes that are mass assignable.
      *

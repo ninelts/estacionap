@@ -49,6 +49,7 @@ class LoginController extends Controller
 
     }
 
+<<<<<<< HEAD
     public function sendFailedLoginResponse(Request $request)
     {   
 
@@ -67,6 +68,13 @@ class LoginController extends Controller
 
         }
 
+=======
+
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect()->back()->with('status','Error al iniciar session');
+>>>>>>> roles
     }
 
 
