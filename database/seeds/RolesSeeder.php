@@ -19,7 +19,7 @@ class RolesSeeder extends Seeder
 
 
     	$roles = new Role();
-    	$roles->name = 'usu';
+    	$roles->name = 'user';
     	$roles->description = 'Cuenta de usuario';
     	$roles->save();
     }

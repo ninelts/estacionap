@@ -13,14 +13,12 @@
 
 Auth::routes(['verify' => true]);
 Route::get('/', function () {return view('estacionapp.inicio');})->name('inicio')->middleware('guest');
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/registro','Auth\RegisterController@index')->name('registro');
 Route::get('/conductor','conductorController@index')->name('conductor');
-Route::get('/Qr', 'conductorController@QR')->name('QR');
-Route::get('/Roles', 'RolesController@index')->name('roles');
-Route::get('/Recepcion', 'RecepcionController@index')->name('recepcion');
-
+Route::get('/qr', 'QrController@create')->name('QR');
+Route::get('/roles', 'RolesController@index')->name('roles')->middleware(['verify' => true]);
+Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
 //RUTAS PRUEBAS
 
 Route::get('login', function() {

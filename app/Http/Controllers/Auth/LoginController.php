@@ -35,7 +35,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/Roles';
+    protected $redirectTo = '/roles';
 
 
     /**
@@ -56,12 +56,15 @@ class LoginController extends Controller
         $attempts = session()->get('login.attempts', 1); // obtener intentos, default: 0
         if ($attempts<=2) {
         session()->put('login.attempts', $attempts + 1); // incrementrar intentos
-        return redirect()->back()->with('status','intento :'.$attempts);
+        return redirect()->back()->with('status','Usuario o contraseña Incorrecta')->with('status2','
+            Intentos :' .$attempts);
             
         }else{
 
 
              return redirect()->back()->with('status','Su Cuenta se ha bloqueado temporalmente')->with('status',$this->decayMinutes.':Minutos');
+                
+
         }
     }
 

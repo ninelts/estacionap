@@ -45,9 +45,31 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+public function render($request, Exception $e) //Funcion para rederigir segun el codigo de exepccion que se presenta
     {
-        return parent::render($request, $exception);
+        if($this->isHttpException($e))    // Comprueba si existe una exepcion 
+        {
+            switch ($e->getStatusCode())  //si existe obitiene el codigo de exepcion
+                {
+                // no encontrada
+                case 404:
+                return redirect('roles');
+                break;
+
+                // error interno
+                case '500':
+                return redirect('roles');
+                break;
+
+                default:
+                    return $this->renderHttpException($e);
+                break;
+            }
+        }
+        else
+        {
+                return parent::render($request, $e);
+        }
     }
 
 
@@ -57,7 +79,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception) //Funcion del framework de laravel para redirigiar a paginas cuando el usuario no esta autenticado a una url por defecto
     {
         if($request->ajax())
-        {
+        {   //No auntenticado
             return response([
                 "message" => "Unauthenticated.",
                 "data" => [],

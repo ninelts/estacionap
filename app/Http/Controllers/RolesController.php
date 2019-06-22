@@ -11,16 +11,16 @@ class RolesController extends Controller
     //
 	public function __construct()
 	{
-		$this->middleware('auth');
+		$this->middleware(['auth']);
 
 	}
 
 	public function index(Request $request){
-		$rol = Auth::user()->roles;  // Llamo al Array Roles que tiene la tabla pivote segun el usuario 
-		foreach ($rol as $role ) { //Recorre el array Para obtener el tipo de rol que tiene el usuario
-			$roles = $role->name;}	
+		$rol = Auth::user()->roles['0']->name;  // Llamo al Array Roles que tiene la tabla pivote segun el usuario 
+		 //Recorre el array Para obtener el tipo de rol que tiene el usuario
+	
 
-			switch ($roles) {  //Muestro menu segun el rol del usuario
+			switch ($rol) {  //Muestro menu segun el rol del usuario
 				case 'user':
 					return redirect()->route('conductor');
 					break; 
