@@ -58,11 +58,16 @@
     <a href="#email"><span class=" email">{{ Auth::user()->email }}</span></a>
     @endauth
   </div></li>
-  <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-  <li><a href="#!">Second Link</a></li>
+  <li><a href="#!"><i class="material-icons">directions_car</i>EstacionaPP</a></li>
+  <li><a href="{{route('inicio')}}">Inicio</a></li>
   <li><div class="divider"></div></li>
-  <li><a class="subheader">Subheader</a></li>
-  <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+  <li><a class="waves-effect" href="#!">Mi Cuenta</a></li>
+  <li><a class="waves-effect" href="#!">Notificaiones</a></li>
+  <li><a class="waves-effect" href="#!">Reservas</a></li>
+  <li><a class="waves-effect" href="#!">Pagar</a></li>
+  <li><div class="divider"></div></li>
+  <li><a class="waves-effect" href="#!">Ayuda</a></li>
+  <li><a class="waves-effect" href="#!">Condiciones</a></li>
   @auth
   <li><div class="divider"></div></li>
   <li>
@@ -71,7 +76,7 @@
   <input class="waves-effect btn-salir" type="submit" name="Salir" value="Cerrar Sesión">
   </form>
   </li>
-      @endauth 
+  @endauth 
 </ul>
 
 
