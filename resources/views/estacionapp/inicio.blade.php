@@ -37,8 +37,10 @@
       <video src="video/bg-login-movil.mp4" autoplay loop muted playsinline></video>
     </div>
 
-
     <div class="botones">
+      <div class="logo">
+        <img class="responsive-img img-logo" src="img/icono-512x512-2.png" alt="">
+      </div>
       <a href="{{route('login')}}" class="boton">Iniciar Sesión</a>
       <a href="{{route('registro')}}" class="boton">Registrarse</a>
     </div>
