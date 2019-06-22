@@ -133,7 +133,7 @@ html {
 /*********** GLOBALES ****************/
 
 .boton {
-    /*background-color: rgba(0, 0, 0, .5);*/
+    background-color: rgba(0, 0, 0, .5);
     padding: .8rem;
     text-align: center;
     color: var(--primario);
@@ -372,6 +372,7 @@ form .link:hover {
     cursor: pointer;
     border: 2px solid var(--primario);
 }
+
 
 /*.menu-reser a:hover {
     cursor: pointer;
