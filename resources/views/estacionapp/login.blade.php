@@ -9,6 +9,7 @@
                 <div class="card-error red lighten-2">
                     <div class="card-content white-text">
                     <p class="center">{{session('status')}}</p>
+                    <p class="center">{{session('status2')}}</p>
                     </div>
                 </div>
             @endif

@@ -16,6 +16,7 @@ class RecepcionController extends Controller
 
     	$request->user()->authorizeRoles(['admin']);
     	return view('estacionapp.session.recepcion.recepcion');
-
     }
 }
+
+

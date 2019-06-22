@@ -24,17 +24,12 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-
-
-
 
     public function index () {
 
@@ -42,13 +37,6 @@ class RegisterController extends Controller
     }
 
 
-    public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
-        event(new Registered($user = $this->create($request->all())));   //metodo para registrar Usuario se crea el evente registrar usuario
-
-        return redirect()->route('registro')->with('status','Se ha registrado Exitosamente');
-    }
 
     /**
      * Create a new controller instance.
@@ -57,7 +45,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware(['guest']);
     }
 
     /**
@@ -66,6 +54,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
     protected function validator(array $data)
     {$messages = array(
         'rut.required'              =>'El campo rut es obligatorio',
@@ -132,6 +121,15 @@ class RegisterController extends Controller
         ]);
         $user->roles()->attach($role);  //Funcion para Agregar el rol y el id del usuario en la tabla pivote o muchos a muchos
          return $user;
+    }
+
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));   //metodo para registrar Usuario se crea el evento registrar usuario
+        $this->guard()->login($user); // Se le asigna una session al usuario creado
+        return redirect()->route('roles'); // Retorna a la ruta roles
     }
 
 }
