@@ -8,9 +8,6 @@ class Reserve extends Model
 {
     public $timestamps = false;
     protected $table = 'reserve';
-    // protected $fillable = [
-    //     'id_tariff', 'id_user', 'id_reservetype','id_qrcode','id_seat'
-    // ];
 
     //Relacion muchos a uno TARIFAS
     public function tariffs()
