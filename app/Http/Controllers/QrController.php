@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\qr_code;
 use Illuminate\Http\Request;
 use  SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Auth;
@@ -10,14 +10,14 @@ class QrController extends Controller
 {
     //
 
-	public function create(){
+	public function create($content){
 
 		$dir    = 'img/Qr/'; // Ruta donde se guardara el Qr
         $rut    = Auth::user()->rut; //Rut de la session
         $name   = $rut.'_'.uniqid().'.png'; //nombre del archivo
         $size   = 250; //Tamanio Qr en pixeles
         $merge  = '/public/img/parking.png'; 
-        $cont   = 'www.google.com'; //contenido del Qr
+        $cont   = $content; //contenido del Qr
         
 
 
@@ -32,6 +32,11 @@ class QrController extends Controller
         ->errorCorrection('H')          //Nivel de detalle de Codigo QR
         ->generate($cont , $dir.$name); //Contenido luego Se concatena el nombre de la ruta + el nombre del qr
         
+
+        $db_qr = new qr_code();
+
+        $db_qr->count_qrcode = $cont;
+        $db_qr->save();
         return redirect('/conductor')->with('QR',$dir.$name);
 	}
 
