@@ -346,6 +346,15 @@ form .link:hover {
     padding-left: .5rem;
 }
 
+.success-form-registroUsu {
+    font-size: 1rem;
+}
+
+.card-success {
+    padding: 1px;
+    border-radius: .2rem;
+}
+
 
 /********* RESERVAS CONDUCTOR ***************/
 

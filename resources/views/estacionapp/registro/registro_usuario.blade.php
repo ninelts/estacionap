@@ -6,13 +6,14 @@
 @section('content')
 <section class="container section animated fadeIn slower">
 
-
-  @if(session('status'))
-  <div class="center"> 
-   <h1 style="color: green"> {{session('status')}}</h1>
-</div>
-
+@if(session('status'))
+    <div class="card-success green lighten-2">
+        <div class="card-content">
+             <h4 class="success-form-registroUsu white-text">{{session('status')}}</h4>
+         </div>
+     </div>
 @endif
+
 <form action="{{route('register')}}" method="POST">
 
     @csrf
@@ -126,6 +127,7 @@
                 <label for="password-confirm">{{ __('Confirm Password') }}</label>
 
             </div>
+
             <div class="input-field col s12 center-align">
                 <button class="boton-submit waves-effect waves-light" type="submit" name="action">Guardar
             </div>

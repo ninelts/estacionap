@@ -29,3 +29,6 @@ Route::get('login', function() {
 Route::get('reserva', function() {
     return view('estacionapp.session.conductor.generarReserva');
 })->name('reserva'); 
+Route::get('admin', function() {
+    return view('estacionapp.administrador.admin');
+})->name('admin'); 

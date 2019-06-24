@@ -1,5 +1,6 @@
-@include('layouts.head')
-@include('layouts.header')
+@extends('layouts.layout')
+
+@section('content')
 <div class="container">
     <div class="row">
         <form class="col s12" action="{{route('login')}}" method="POST">
@@ -43,4 +44,4 @@
         </form>
     </div>
 </div>
-@include('layouts.footer')
+@endsection

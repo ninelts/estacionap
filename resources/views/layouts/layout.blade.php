@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Smart-Parking</title>
+  <title>EstacionaPP</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -43,7 +43,7 @@
   @auth
    <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
   @endauth 
-   <a href="{{route('inicio')}}" class="back-page left"><i class="fas fa-arrow-left"></i></a>
+   <a href="{{route('inicio')}}" class="back-page left  hide-on-med-and-up"><i class="fas fa-arrow-left"></i></a>
  </div>
 
 </nav>
