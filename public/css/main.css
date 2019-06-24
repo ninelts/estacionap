@@ -401,6 +401,28 @@ form .link:hover {
     flex-direction: column;
     align-items: center;
     font-family: var(--texto-primario);
+    border: 1px solid #000;
+}
+
+.info-misreservas img {
+    width: 100%;
+}
+
+
+/******MIS RESERVAS *******/
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-content p {
+    font-family: var(--secundario);
+}
+
+.card-content span {
+    font-family: var(--texto-primario);
 }
 
 
