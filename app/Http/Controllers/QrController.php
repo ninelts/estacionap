@@ -32,11 +32,6 @@ class QrController extends Controller
         ->errorCorrection('H')          //Nivel de detalle de Codigo QR
         ->generate($cont , $dir.$name); //Contenido luego Se concatena el nombre de la ruta + el nombre del qr
         
-
-        $db_qr = new qr_code();
-
-        $db_qr->count_qrcode = $cont;
-        $db_qr->save();
         return redirect('/conductor')->with('QR',$dir.$name);
 	}
 
