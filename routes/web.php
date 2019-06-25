@@ -24,3 +24,12 @@ Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
 Route::get('login', function() {
     return view('estacionapp.login');
 })->name('login')->middleware('guest');  
+Route::get('reserva', function() {
+    return view('estacionapp.session.conductor.generarReserva');
+})->name('reserva'); 
+Route::get('admin', function() {
+    return view('estacionapp.administrador.admin');
+})->name('admin'); 
+Route::get('misreservas', function() {
+    return view('estacionapp.session.conductor.misReservas');
+})->name('misreservas'); 

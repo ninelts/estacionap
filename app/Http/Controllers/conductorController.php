@@ -25,6 +25,7 @@ class conductorController extends Controller
 
         return view('estacionapp.session.conductor.conductor');
     }
+
 }
 
 
