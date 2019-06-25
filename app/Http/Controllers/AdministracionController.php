@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Yajra\Datatables\Datatables;
 use PDF;
-
+use Illuminate\Support\Facades\DB;
 // use Datatables;
 
 class AdministracionController extends Controller
@@ -28,7 +28,8 @@ class AdministracionController extends Controller
     }
     public function pdfUsers()
     {
-        $pdf = PDF::loadView('estacionapp.administrador.administrador');
+        $users = DB::table('users')->get();
+        $pdf = PDF::loadView('estacionapp.administrador.reporteUsuarios',['users' => $users]);
         return $pdf->stream();
     }
 }
