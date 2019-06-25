@@ -25,15 +25,14 @@ class ExpressController extends Controller
 
 	public function create(){  //Reserva Express
 
-
-		$fecha1 = Carbon::now()->addMinutes(10);  //Tiempo limite de expiracion
+		$plaza = Seat::where('state_seat', 0)->get();
+		$expiration = Carbon::now()->addMinutes(10);  //Tiempo limite de expiracion
 		$tarifa = Tariff::where('id_tariff', 1)->first()->id_tariff;   // Tipo de Tarifa
 		$tiporeserva = ReserveType::where('id_reservetype', 1)->first()->id_reservetype; 
 		$plazadisponible = Seat::where('state_seat', 0)->first()->id_seat;
 
-		dd($d);
 		$reserve = new ReservationController();
-		return $reserve->create($fecha1 , $tarifa , $tiporeserva , $plazadisponible); // Retorna a ReservationController
+		return $reserve->create($expiration , $tarifa , $tiporeserva , $plazadisponible , $plaza); // Retorna a ReservationController
 	}
 
 
@@ -42,7 +41,7 @@ class ExpressController extends Controller
 		$reserve = new Reserve;
 		$carbon = Carbon::now();
 		
-		// Consulta en la db si la fecha actual es mayor a la fecha de expiracion , omite las reservas activas con valor 0 , y consulta que el tipo de reserva sea express 
+		//Consulta en la db si la fecha actual es mayor a la fecha de expiracion , omite las reservas activas con valor 0 , y consulta que el tipo de reserva sea express 
 		$query = Reserve::all()->where('expiration_reserve', '<' , Carbon::now())->where('id_reservetype', 1)->whereNotIn('activate_reserve', [0]);   
 
 		//Recorre un arreglo para traer todas las consultas que tengan el formato de la query

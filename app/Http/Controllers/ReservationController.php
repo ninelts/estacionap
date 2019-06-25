@@ -16,20 +16,21 @@ use App\Http\Controllers\QrController;
 
 class ReservationController extends Controller
 {
-	public function create ($fecha1 , $tiporeserva , $tarifa ,$plazadisponible){
+	public function create ($expiration , $tiporeserva , $tarifa ,$plazadisponible, $state_seat){
     	// Carbon::now()->addDays(2)->addHour(3)->addMinutes(20); Metodo para agregar dias horas y minutos
 		// subMinutes(20) elimina
 
 
     		// Se llama a todo los atributos de la tabla qr_code
 			$db_qr_last = qr_code::All()->last()->id_qrcode; 	
-    	    $plaza = Seat::where('state_seat', 0)->get(); // se consulta las plazas
-
-
-
+    		$plaza = Seat::where('state_seat', 0)->get(); // se consulta las pla	
+				
+    		
     	    if (!$plaza->isEmpty()) {
+    	    	if ($state_seat == 0 ) {
+    	    
 
-    	    	$useronline = Auth::user()->id;
+    	    $useronline = Auth::user()->id;
 			$content = uniqid().uniqid();  		   // Genera Codigo unico
 			$db_qr = new qr_code();
 			$db_qr->content_qrcode = $content;  //Se Genera insercion a codigo QR
@@ -42,16 +43,22 @@ class ReservationController extends Controller
 			$reserva->id_reservetype = $tiporeserva;
 			$reserva->id_seat = $plazadisponible;
 			$reserva->date_reserve = Carbon::now();
-			$reserva->expiration_reserve = $fecha1;
-			$reserva->activate_reserve = 1;
+			$reserva->expiration_reserve = $expiration;
+			$reserva->activate_reserve = 0;
 			$reserva->id_qrcode = $db_qr_last; //Busca el ultimo id del qr_code  
 			$reserva->save();
 			$plazaocupada = Seat::where('id_seat', $plazadisponible)->update(['state_seat' => 1]);
-			$plazaestado = Seat::where('state_seat', 0)->first()->state_seat;
 			$CreateQr =  new QrController();
 
 		 	 return $CreateQr->create($content);  // Retorna al c
 
+    	    	}else {
+
+						$respuestamala = "Plaza reservada ;(";
+		 		return view('estacionapp.session.conductor.express')->with('respuesta', $respuestamala);    	    			
+
+    	    	}
+    	    
 		 	} else {
 
 		 		$respuestamala = "sin espacio ;(";
