@@ -138,7 +138,7 @@ html {
     background-color: rgba(0, 0, 0, .5);
     padding: .8rem;
     text-align: center;
-    color: var(--texto1);
+    color: var(--primario);
     border-radius: 5px;
     transition: .3s ease-in-out;
     display: inline-block;
@@ -164,23 +164,13 @@ html {
     box-shadow: 5px 5px 2px var(--sombra);
 }
 
-
-/* .boton-submit:hover {
-    cursor: pointer;
-    background-color: var(--primario);
-} */
-
-.boton:hover {
-    cursor: pointer;
-    background-color: var(--primario);
-}
-
 h1,
 h2,
 h3,
 h4 {
     font-family: var(--texto-primario);
     color: var(--tercero);
+    text-align: center;
 }
 
 nav {
@@ -370,6 +360,15 @@ form .link:hover {
     padding-left: .5rem;
 }
 
+.success-form-registroUsu {
+    font-size: 1rem;
+}
+
+.card-success {
+    padding: 1px;
+    border-radius: .2rem;
+}
+
 
 /********* RESERVAS CONDUCTOR ***************/
 
@@ -381,24 +380,28 @@ form .link:hover {
 }
 
 .menu-reser a i {
-    font-size: 8rem;
+    font-size: 6rem;
     transition: .2s ease-in-out;
 }
 
 .menu-reser a span {
     font-size: 1.5rem;
     margin-top: 1rem;
-}
-
-.menu-reser a {
     color: var(--secundario);
 }
 
-.menu-reser a:hover {
+.menu-reser a {
+    color: var(--primario);
+    cursor: pointer;
+    border: 2px solid var(--primario);
+}
+
+
+/*.menu-reser a:hover {
     cursor: pointer;
     color: var(--primario);
     transform: scale(1.5);
-}
+}*/
 
 .menu-reser .boton {
     display: flex;
@@ -411,6 +414,28 @@ form .link:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: var(--texto-primario);
+    border: 1px solid #000;
+}
+
+.info-misreservas img {
+    width: 100%;
+}
+
+
+/******MIS RESERVAS *******/
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-content p {
+    font-family: var(--secundario);
+}
+
+.card-content span {
     font-family: var(--texto-primario);
 }
 
