@@ -12,20 +12,32 @@
 */
 
 Auth::routes(['verify' => true]);
+
+/*RUTAS SIN SESSION*/
 Route::get('/', function () {return view('estacionapp.inicio');})->name('inicio')->middleware('guest');
 Route::get('/registro', 'Auth\RegisterController@index')->name('registro');
+Route::get('login', function () {return view('estacionapp.login');})->name('login')->middleware('guest');
+
+
+
+/*RUTAS CON SESSION*/
+Route::get('/roles', 'RolesController@index')->name('roles')->middleware(['verify' => true]);
+
 Route::get('/conductor', 'conductorController@index')->name('conductor');
 Route::get('/qr', 'QrController@create')->name('QR');
-Route::get('/roles', 'RolesController@index')->name('roles')->middleware(['verify' => true]);
 Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
+    
 
-Route::get('/diaria', function () {return view('estacionapp.session.conductor.diaria');})->name('diaria');
-Route::get('/diarias/', 'ReservasController@daily')->name('diariacontroller');
-Route::get('/confdiaria', 'RegistroDiariaController@create')->name('confdiaria');
-Route::get('/express', 'ReservasController@express')->name('registro_express');
-Route::get('/mensual', 'mensualController@index')->name('mensual');
-//RUTAS PRUEBAS
+/*RESERVA EXPRESS*/
+Route::get('/express', 'reserves\ExpressController@create')->name('express');
 
-Route::get('login', function () {
-    return view('estacionapp.login');
-})->name('login')->middleware('guest');
+/*RESERVA DIARIA*/
+
+Route::get('/diaria','reserves\DayliController@index')->name('vdiaria');
+Route::post('/diarias/', 'reserves\DayliController@create')->name('cdiaria');
+
+/*RESERVA MENSUAL*/
+Route::get('/mensual', 'reserves\mensualController@index')->name('mensual');
+
+
+/*RUTAS--CON--SESSION*/

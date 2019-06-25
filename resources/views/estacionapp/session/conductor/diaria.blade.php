@@ -4,7 +4,8 @@
 @section('content')
 <a href="{{route('conductor')}}" class="back-page left"><i class="fas fa-arrow-left"></i></a>
 <h1>Lista de plazas</h1>
-<form action="{{route('confdiaria')}}" method="POST">
+<form action="{{route('cdiaria')}}" method="POST">
+    @csrf
     <table class="">
         <thead>
             <tr>
@@ -37,7 +38,7 @@
                     @endif
                 </td>
                 <td>
-                    <input id="fecha_reserva" type="date" name="dateFechaReserva" class="validate">
+                    <input id="fecha_reserva" type="date" name="dateFechaReserva{{$loop->iteration}}" class="validate">
                     <label for="fecha_reserva">Fecha Reserva</label>
                 </td>
                 <td><input class="boton btn-registro" type="submit" value="Reservar"></td>
