@@ -14,7 +14,7 @@ class RecepcionController extends Controller
     public function index (Request $request) {
 
 
-    	$request->user()->authorizeRoles(['admin']);
+    	$request->user()->authorizeRoles(['recep']);
     	return view('estacionapp.session.recepcion.recepcion');
     }
 }

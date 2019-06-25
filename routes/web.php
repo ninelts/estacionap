@@ -19,6 +19,10 @@ Route::get('/conductor','conductorController@index')->name('conductor');
 Route::get('/qr', 'QrController@create')->name('QR');
 Route::get('/roles', 'RolesController@index')->name('roles')->middleware(['verify' => true]);
 Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
+
+Route::get('/administracion', 'AdministracionController@index')->name('administracion'); //**Carga la vista administrador */
+    Route::get('/dtbl.users', 'AdministracionController@getUsers')->name('datatable.users');//**el jquery se encarga de traer de getUser las variables a mostrar */
+    Route::get('/pdf.users','AdministracionController@pdfUsers')->name('pdf.users');
 //RUTAS PRUEBAS
 
 Route::get('login', function() {

@@ -175,7 +175,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*
@@ -228,7 +228,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
     ],
 
 ];
