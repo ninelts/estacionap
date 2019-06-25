@@ -120,6 +120,8 @@ textarea {
 }
 
 html {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -279,17 +281,21 @@ body {
 }
 
 .botones {
+    margin: 0;
+    padding: 0;
     position: relative;
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 1;
 }
 
 #cabecera {
     height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 .video {
@@ -304,6 +310,14 @@ body {
 .video video {
     min-width: 100%;
     min-height: 100%;
+}
+
+.botones .logo {
+    max-width: 400px;
+}
+
+.botones .logo img {
+    width: 100%;
 }
 
 
