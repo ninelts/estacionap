@@ -129,7 +129,7 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));   //metodo para registrar Usuario se crea el evento registrar usuario
         $this->guard()->login($user); // Se le asigna una session al usuario creado
-        return redirect()->route('roles'); // Retorna a la ruta roles
+        return redirect()->route('roles'); // Retorna a la ruta roless
     }
 
 }
