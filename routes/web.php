@@ -36,3 +36,6 @@ Route::get('misreservas', function() {
 Route::get('datosUsuario', function() {
     return view('estacionapp.session.conductor.datosUsuario');
 })->name('datosUsuario'); 
+Route::get('registroAuto', function() {
+    return view('estacionapp.registro.registro_auto');
+})->name('registroAuto'); 

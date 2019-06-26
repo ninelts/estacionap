@@ -138,7 +138,7 @@ html {
     background-color: rgba(0, 0, 0, .5);
     padding: .8rem;
     text-align: center;
-    color: var(--primario);
+    color: var(--texto1);
     border-radius: 5px;
     transition: .3s ease-in-out;
     display: inline-block;
@@ -280,6 +280,9 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 1;
+}   
+.botones .inicio{
+    background-color: var(--primario);
 }
 
 #cabecera {
