@@ -41,7 +41,7 @@
       <div class="logo">
         <img class="responsive-img img-logo" src="img/icono-512x512-2.png" alt="">
       </div>
-      <a href="{{route('login')}}" class="boton">Iniciar Sesión</a>
+      <a href="{{route('login')}}" class="boton inicio waves-effect waves-light">Iniciar Sesión</a>
       <a href="{{route('registro')}}" class="boton">Registrarse</a>
     </div>
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>

@@ -65,7 +65,7 @@
   <li><a href="#!"><i class="material-icons">directions_car</i>EstacionaPP</a></li>
   <li><a href="{{route('inicio')}}">Inicio</a></li>
   <li><div class="divider"></div></li>
-  <li><a class="waves-effect" href="#!">Mi Cuenta</a></li>
+  <li><a class="waves-effect" href="{{route('datosUsuario')}}">Mi Cuenta</a></li>
   <li><a class="waves-effect" href="#!">Notificaiones</a></li>
   <li><a class="waves-effect" href="#!">Reservas</a></li>
   <li><a class="waves-effect" href="#!">Pagar</a></li>

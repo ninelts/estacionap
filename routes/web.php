@@ -37,4 +37,10 @@ Route::get('admin', function() {
 })->name('admin'); 
 Route::get('misreservas', function() {
     return view('estacionapp.session.conductor.misReservas');
-})->name('misreservas'); 
+})->name('misreservas');
+Route::get('datosUsuario', function() {
+    return view('estacionapp.session.conductor.datosUsuario');
+})->name('datosUsuario'); 
+Route::get('scanner', function() {
+    return view('estacionapp.session.recepcion.lectorQr');
+})->name('scanner'); 
