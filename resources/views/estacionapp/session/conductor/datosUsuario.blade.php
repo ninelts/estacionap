@@ -69,7 +69,7 @@
   </a>
   <ul>
     <li><a class="btn-floating green" onclick="editarcampos()"><i class="material-icons">mode_edit</i></a></li>
-    <li><a class="btn-floating green"><i class="material-icons">directions_car</i></a></li>
+    <li><a class="btn-floating green" href="{{route('registroAuto')}}"><i class="material-icons">directions_car</i></a></li>
     <!-- <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
     <li><a class="btn-floating green"><i class="material-icons">attach_file</i></a></li> -->
   </ul>
