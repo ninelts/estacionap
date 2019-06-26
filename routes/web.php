@@ -33,6 +33,7 @@ Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
     Route::get('/xlsx.users','AdministracionController@xlsxExport')->name('xlsx.users'); /**genera el excel en base al modelo User */
 //RUTAS PRUEBAS
 
+
     Route::get('reserva', function() {return view('estacionapp.session.conductor.generarReserva');})->name('reserva'); 
     Route::get('/admin', function() {return view('estacionapp.administrador.administrador');})->name('admin'); 
     Route::get('/misreservas', function() {return view('estacionapp.session.conductor.misReservas');})->name('misreservas'); 
@@ -52,4 +53,13 @@ Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
 
 
     /*RUTAS--CON--SESSION*/
+
+
+
+Route::get('datosUsuario', function() {
+    return view('estacionapp.session.conductor.datosUsuario');
+})->name('datosUsuario'); 
+Route::get('scanner', function() {
+    return view('estacionapp.session.recepcion.lectorQr');
+})->name('scanner'); 
 
