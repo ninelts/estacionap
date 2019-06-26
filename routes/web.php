@@ -38,3 +38,7 @@ Route::get('admin', function() {
 Route::get('misreservas', function() {
     return view('estacionapp.session.conductor.misReservas');
 })->name('misreservas'); 
+Route::get('admin', function() {
+    return view('estacionapp.administrador.admin');
+})->name('admin');
+Route::get('logout','LoginController@logout');
