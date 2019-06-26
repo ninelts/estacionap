@@ -37,13 +37,6 @@ Route::get('admin', function() {
 })->name('admin'); 
 Route::get('misreservas', function() {
     return view('estacionapp.session.conductor.misReservas');
-<<<<<<< HEAD
-})->name('misreservas'); 
-Route::get('admin', function() {
-    return view('estacionapp.administrador.admin');
-})->name('admin');
-Route::get('logout','LoginController@logout');
-=======
 })->name('misreservas');
 Route::get('datosUsuario', function() {
     return view('estacionapp.session.conductor.datosUsuario');
@@ -51,4 +44,3 @@ Route::get('datosUsuario', function() {
 Route::get('scanner', function() {
     return view('estacionapp.session.recepcion.lectorQr');
 })->name('scanner'); 
->>>>>>> prueba
