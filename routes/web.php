@@ -22,7 +22,8 @@ Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
 
 Route::get('/administracion', 'AdministracionController@index')->name('administracion'); //**Carga la vista administrador */
     Route::get('/dtbl.users', 'AdministracionController@getUsers')->name('datatable.users');//**el jquery se encarga de traer de getUser las variables a mostrar */
-    Route::get('/pdf.users','AdministracionController@pdfUsers')->name('pdf.users');
+    Route::get('/pdf.users','AdministracionController@pdfUsers')->name('pdf.users'); //**genera el pdf en base a la vista reporteUsuario.blade */
+    Route::get('/xlsx.users','AdministracionController@xlsxExport')->name('xlsx.users'); /**genera el excel en base al modelo User */
 //RUTAS PRUEBAS
 
 Route::get('login', function() {

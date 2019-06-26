@@ -7,7 +7,8 @@ use App\User;
 use Yajra\Datatables\Datatables;
 use PDF;
 use Illuminate\Support\Facades\DB;
-// use Datatables;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdministracionController extends Controller
 {
@@ -29,7 +30,12 @@ class AdministracionController extends Controller
     public function pdfUsers()
     {
         $users = DB::table('users')->get();
-        $pdf = PDF::loadView('estacionapp.administrador.reporteUsuarios',['users' => $users]);
+        $pdf = PDF::loadView('estacionapp.administrador.reporteUsuarios', ['users' => $users]);
+        $pdf->setPaper('letter', 'portrait');
         return $pdf->stream();
+    }
+    public function xlsxExport()
+    {
+        return Excel::download(new UsersExport, 'ususarios_estacionapp.xlsx');
     }
 }
