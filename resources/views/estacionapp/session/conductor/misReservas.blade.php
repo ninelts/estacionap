@@ -27,10 +27,10 @@
       <div class="card yellow lighten-4">
         <div class="card-image">
           <img src="img/usuario.jpg">
-          <span class="card-title blue-grey-text darken-2-text">Mi Reserva</span>
         </div>
+
         <div class="card-content ">
-            <p>Actulmente no existen reservas asociadas a esta cuenta. 
+            <p>Actualmente no existen reservas asociadas a esta cuenta. 
             si desea realizar una reserva presione el siguiente enlace.</p>
         </div>
         <div class="card-action">
