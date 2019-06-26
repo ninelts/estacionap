@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.0/normalize.css">
     <link href="https://fonts.googleapis.com/css?family=Oswald|Port+Lligat+Sans" rel="stylesheet">
     <link rel="stylesheet" href="css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
@@ -15,8 +16,8 @@
 <div class="pagina">
     <header class="header">
             <div class="nombre-sitio">
-                <h1 class="escritorio">EstacionaPP</h1>
-                <h1 class="movil">AP</h1>
+                <p class="escritorio">EstacionaPP</p>
+                <p class="movil">AP</p>
             </div>
             <div class="barra">
                 <div class="menu-izquierdo">
@@ -162,6 +163,7 @@
                     </ul>
                 </div>
         </aside>
+@yield('content');
 
 <script src="js/admin.js" async defer></script>
 <script src="https://kit.fontawesome.com/80c7d27d36.js"></script>

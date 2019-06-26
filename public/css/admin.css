@@ -58,9 +58,10 @@ html {
     line-height: 0%;
     } 
 }
-.header .nombre-sitio h1 {
+.header .nombre-sitio p {
     color: #FFFFFF; 
     font-family: var(--texto-secundario);
+    font-size: 2rem;
 }
 .header .nombre-sitio .escritorio {
     display: none; 
@@ -195,6 +196,10 @@ html {
 flex: 1;
 padding: 2rem; 
 }
-  
 
-  
+/*******REPORTE CRUD USUARIO *********/
+
+.container h3{
+    text-align: center;
+    
+}
