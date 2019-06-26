@@ -1,10 +1,16 @@
-<?php include_once 'includes/templates/head.blade.php'; ?>
-<nav>
-    <a href="#" class="brand-logo">Smart-Parking</a>
-    <a href="#" class="back-page left"><i class="fas fa-arrow-left"></i></a>
-</nav>
+@extends('layouts.layout')
+@section('content')
 <section class="container section animated fadeIn slower">
-    <form action="{{route('registro_auto_post')}}" method="POST">
+
+@if(session('status'))
+    <div class="card-success green lighten-2">
+        <div class="card-content">
+             <h4 class="success-form-registroUsu white-text">{{session('status')}}</h4>
+         </div>
+     </div>
+@endif
+
+<form action="{{route('registro_auto_post')}}" method="POST">
         @csrf
         <h4>Registro Automovil</h4>
         <div class="col s12">
@@ -53,5 +59,4 @@
         </div>
     </form>
 </section>
-
-<?php include_once 'includes/templates/footer.blade.php'; ?>
+@endsection
