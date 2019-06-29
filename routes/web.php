@@ -59,7 +59,12 @@ Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
 Route::get('datosUsuario', function() {
     return view('estacionapp.session.conductor.datosUsuario');
 })->name('datosUsuario'); 
+
 Route::get('scanner', function() {
     return view('estacionapp.session.recepcion.lectorQr');
-})->name('scanner'); 
+})->name('scanner');
+
+Route::get('Registro/Automovil', function() {
+     return view ('estacionapp.registro.registro_auto'); 
+ })->name('registro_automovil'); 
 
