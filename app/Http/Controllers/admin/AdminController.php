@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Yajra\Datatables\Datatables;
@@ -10,12 +11,11 @@ use Illuminate\Support\Facades\DB;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-class AdministracionController extends Controller
+class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','verified']);  //Middleware
-    }
+        $this->middleware(['auth','verified']);  //Middleware    }
 
     public function index(Request $request) //**verifica el rol para mostrar la vista de administrador */
     {

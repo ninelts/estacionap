@@ -6,15 +6,15 @@
 @section('content')
 <section class="container section animated fadeIn slower">
 
-@if(session('status'))
+    @if(session('status'))
     <div class="card-success green lighten-2">
         <div class="card-content">
-             <h4 class="success-form-registroUsu white-text">{{session('status')}}</h4>
-         </div>
+         <h4 class="success-form-registroUsu white-text">{{session('status')}}</h4>
      </div>
-@endif
+ </div>
+ @endif
 
-<form action="{{route('register')}}" method="POST">
+ <form action="{{route('register')}}" method="POST">
 
     @csrf
     <h4>Registro Conductor</h4>
@@ -130,9 +130,23 @@
 
             <div class="input-field col s12 center-align">
                 <button class="boton-submit waves-effect waves-light" type="submit" name="action">Guardar
+                </div>
             </div>
-        </div>
 
-    </form>
-</section>
-@endsection
+        </form>
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+                setInterval(function(){
+                    $.ajax({
+                      url: "{{route('register')}}",
+                      success: function( response ) {
+
+                      }
+                  });
+                },1000);
+            });
+
+        </script>
+    </section>
+    @endsection
