@@ -16,7 +16,7 @@ class QrController extends Controller
 
 	public function create($content){
 
-		$dir    = 'img/Qr/'; // Ruta donde se guardara el Qr
+		$dir    = 'img/Qr/'.Auth::user()->rut.'/'; // Ruta donde se guardara el Qr
         $rut    = Auth::user()->rut; //Rut de la session
         $name   = $rut.'_'.uniqid().'.png'; //nombre del archivo
         $size   = 250; //Tamanio Qr en pixeles

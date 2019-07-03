@@ -55,8 +55,9 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
 
-    protected function validator(array $data)
-    {$messages = array(
+    protected function validator(array $data){
+
+        $messages = array(
         'rut.required'              =>'El campo rut es obligatorio',
         'rut.min'                   =>'El campo rut debe contener 9 caracteres como minimo',
         'rut.unique'                =>'El rut ya se encuentra registrado',

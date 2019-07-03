@@ -16,14 +16,14 @@ use App\Http\Controllers\QrController;
 
 class ReservationController extends Controller
 {
-	   public function __construct()
-    {
+	public function __construct()
+	{
         $this->middleware(['auth','verified']);  //Middleware
-		
+
     }
 
+    public function create ( $expiration , $tiporeserva , $tarifa , $plazadisponible , $activate_reserve  ){
 
-    public function create ( $expiration , $tiporeserva , $tarifa , $plazadisponible , $activate_reserve , $id_reservetype ){
     	// Carbon::now()->addDays(2)->addHour(3)->addMinutes(20); Metodo para agregar dias horas y minutos
 		// subMinutes(20) elimina
 
@@ -34,7 +34,7 @@ class ReservationController extends Controller
     		if (!$plaza->isEmpty()) {
 
 
-    		$useronline = Auth::user()->id;
+    			$useronline = Auth::user()->id;
 			$content = uniqid().uniqid();  		   // Genera Codigo unico
 			$db_qr = new qr_code();
 			$db_qr->content_qrcode = $content;  //Se Genera insercion a codigo QR
@@ -54,71 +54,68 @@ class ReservationController extends Controller
 			$reserva->id_qrcode = $db_qr_last; //Busca el ultimo id del qr_code  
 
 
-		
+
 			$reserva->save();
-	
+
 				# code...
-		
+
 			return $this->validates($content);
 
 		 // Retorna al c
 
 
 
-		 	} else {
+		} else {
 
-		 		$respuestamala = "Sin Reservas Disponibles ;(";
-		 		return view('estacionapp.session.conductor.express')->with('respuesta', $respuestamala);
-		 	}
-		 }
-
-
+			$respuestamala = "Sin Reservas Disponibles ;(";
+			return view('estacionapp.session.conductor.express')->with('respuesta', $respuestamala);
+		}
+	}
 
 
-		 public function createExpress ($expiration , $tiporeserva , $tarifa ,$plazadisponible, $activate_reserve , $id_reservetype){
-
-		 	 	//Se consulta en la db si la fecha introducida en el form existe en la db , como el id_reserva , y si el tipo se plaza es igual
-		 	
-
-			return	$this->create($expiration , $tiporeserva , $tarifa ,$plazadisponible , $activate_reserve , $id_reservetype );
-
-		 }
 
 
-		 public function createDayli ($expiration , $tiporeserva , $tarifa ,$plazadisponible,  $activate_reserve , $id_reservetype){
+	public function validates($content) {
+		/* $query  Valida que la fecha dada en activate_reserve haya sido superada por la fecha actual */
+		$query = Reserve::all()->where('activate_reserve', '<=' , Carbon::now())->where('expiration_reserve', '>=' , Carbon::now());    
+		dd(Carbon::now());
+		foreach ($query as $query_result ) {
+			if ($query_result->activate_reserve <= Carbon::now()) {
 
-		 		 //Se consulta en la db si la fecha introducida en el form existe en la db , como el id_reserva , y si el tipo se plaza es igual
-		 	$query = Reserve::where('activate_reserve' , $activate_reserve )->where('id_reservetype', $id_reservetype)->where('id_seat' , $plazadisponible)->get();  
+			//	$a= DB::table('seat')->where('id_seat', $query_result->id_seat)->where('state_seat' , 0)->increment('state_seat');
+		 	 //Se Ocupa la Plaza
+				$s = $query_result->id_seat;
+				$seat = Seat::find($s);
 
+				$seat->state_seat = 1;
 
-		 	if(!$query->isEmpty()){
-		 		return redirect()->back()->with('status','Plaza Nro° :'.$plazadisponible.' '.'Ya reservada para la Fecha :'.date_format($activate_reserve, 'd-m-Y'));
-		 	} 
-		 	return $this->create($expiration , $tiporeserva , $tarifa ,$plazadisponible , $activate_reserve , $id_reservetype );
+				$seat->save();
 
-		 }
-
-		 public function validates($content) {
-		 /* $query  Valida que la fecha dada en activate_reserve haya sido superada por la fecha actual */
-		 	$query = Reserve::all()->where('activate_reserve', '<=' , Carbon::now()->addMinutes(0));    
-		 	foreach ($query as $query_result ) {
+			}
+		}
+		
+		/* $query2  Valida que la fecha dada en expiration_reserve haya sido superada por la fecha actual */
+		$query2 = Reserve::all()->where('expiration_reserve', '<=' , Carbon::now());    
+		foreach ($query2 as $query_result2 ) {
 		 		
-		 		Seat::where('id_seat' ,$query_result->id_seat)->update(['state_seat' => 1]); //Se Ocupa la Plaza
-		 	}
-		 	 /* $query2  Valida que la fecha dada en expiration_reserve haya sido superada por la fecha actual */
-		 	$query2 = Reserve::all()->where('expiration_reserve', '<=' , Carbon::now());    
-		 	foreach ($query2 as $query_result2 ) {
-		 		
-		 		Seat::where('id_seat' ,$query_result2->id_seat)->update(['state_seat' => 0]); //Se libera la plaza
-		 	}
 
-		 		$CreateQr =  new QrController();
+		 	// $b= DB::table('seat')->where('id_seat', $query_result2->id_seat)->where('state_seat' , 1)->decrement('state_seat'); //Se libera la plaza
 
-		 	 return $CreateQr->create($content); 
+			$s = $query_result2->id_seat;
+			$seat = Seat::find($s);
 
-		 }
+			$seat->state_seat = 0;
 
-
-
+			$seat->save();
 
 		}
+
+
+		$CreateQr =  new QrController();
+		return $CreateQr->create($content); 
+	}
+
+
+
+
+}

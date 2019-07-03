@@ -11,13 +11,6 @@ class conductorController extends Controller
 {
     //
 
-        public function __construct()
-    {
-        $this->middleware(['auth','verified']);  //Middleware
-    }
-
-
-    
     public function index(Request $request)
     {
 

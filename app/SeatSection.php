@@ -9,6 +9,6 @@ class SeatSection extends Model
     protected $table = 'seat_section'; 
     public function seats()
     {
-        return $this-> hasMany('App\Seat');
+        return $this->hasMany('App\Seat' , 'id_seat' , 'id_seatsection');
     }  
 }

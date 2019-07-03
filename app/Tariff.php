@@ -10,6 +10,6 @@ class Tariff extends Model
     //Relacion uno a muchos RESERVAS
     public function reserves()
     {
-        return $this-> hasMany('App\Reserve');
+        return $this->hasMany('App\Reserve');
     }
 }

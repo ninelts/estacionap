@@ -10,7 +10,7 @@
      </div>
 @endif
 
-<form action="{{route('registro_auto_post')}}" method="POST">
+<form action="" method="POST">
         @csrf
         <h4>Registro Automovil</h4>
         <div class="col s12">
@@ -24,9 +24,10 @@
                 <div class="input-field col s6">
                     <select name="marca_auto">
                         <!-- <option value="" disabled selected>Elija marca</option> -->
-                        @foreach($marcas as $marcas1) 
-                        <option value="{{$marcas1->id_marca}}"> {{$marcas1->nom_marca}}</option>
-                        @endforeach
+                     
+                        <option value=""> </option>
+                        
+
                     </select>
 
                     <label>Marca Auto</label>

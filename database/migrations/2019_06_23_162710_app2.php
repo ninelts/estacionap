@@ -16,7 +16,7 @@ class App2 extends Migration
         Schema::create('brand', function(Blueprint $table) {
             $table->engine = 'InnoDB';
         
-            $table->increments('id_brand');
+            $table->increments('id');
             $table->string('name_brand', 45);
         
             $table->timestamps();
@@ -26,7 +26,7 @@ class App2 extends Migration
         Schema::create('car', function(Blueprint $table) {
             $table->engine = 'InnoDB';
         
-            $table->string('id_car', 6);
+            $table->string('id');
             $table->integer('id_model');
             $table->integer('id_brand');
         
@@ -37,7 +37,7 @@ class App2 extends Migration
         Schema::create('model', function(Blueprint $table) {
             $table->engine = 'InnoDB';
         
-            $table->increments('id_model');
+            $table->increments('id');
             $table->string('name_model', 45);
             $table->string('type_model', 45);
         
@@ -58,7 +58,7 @@ class App2 extends Migration
         Schema::create('payment', function(Blueprint $table) {
             $table->engine = 'InnoDB';
         
-            $table->increments('id_payment');
+            $table->increments('id');
             $table->string('name_payment', 45);
             $table->integer('id_paytype');
         
@@ -69,7 +69,7 @@ class App2 extends Migration
         Schema::create('payment_type', function(Blueprint $table) {
             $table->engine = 'InnoDB';
         
-            $table->increments('id_paytype');
+            $table->increments('id');
             $table->string('name_paytype', 45);
             $table->string('detail_paytype', 45);
         
@@ -80,7 +80,7 @@ class App2 extends Migration
         Schema::create('qr_code', function(Blueprint $table) {
             $table->engine = 'InnoDB';
         
-            $table->increments('id_qrcode');
+            $table->increments('id');
             $table->boolean('count_qrcode');
         
             $table->timestamps();
@@ -90,9 +90,8 @@ class App2 extends Migration
         Schema::create('reserve', function(Blueprint $table) {
             $table->engine = 'InnoDB';
         
-            $table->increments('id_reserve');
-            $table->date('date_reserve')->default(null);
-            $table->time('hour_reserve')->default(null);
+            $table->increments('id');
+            $table->datetime('date_reserve')->default(null);
             $table->integer('id_tariff');
             $table->bigInteger('id_user')->unsigned();
             $table->integer('id_payment')->default(null);
@@ -100,6 +99,9 @@ class App2 extends Migration
             $table->integer('id_servdet')->default(null);
             $table->integer('id_qrcode')->default(null);
             $table->integer('id_seat');
+            $table->datetime('activate_reserve');
+            $table->datetime('expiration_reserve');
+            $table->datetime('expiration_reserve');
         
             $table->timestamps();
         
@@ -108,7 +110,7 @@ class App2 extends Migration
         Schema::create('reserve_type', function(Blueprint $table) {
             $table->engine = 'InnoDB';
         
-            $table->increments('id_reservetype');
+            $table->increments('id');
             $table->string('name_reservetype', 45);
             $table->string('description_reservetype', 255);
         
@@ -140,7 +142,7 @@ class App2 extends Migration
             $table->engine = 'InnoDB';
         
             $table->increments('id_seat');
-            $table->boolean('state_seat');
+            $table->tinyint('state_seat')->unsigned();
             $table->integer('id_seatsection');
         
             $table->timestamps();

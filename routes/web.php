@@ -14,31 +14,27 @@
 Auth::routes(['verify' => true]);
 
 /*RUTAS SIN SESSION*/
-Route::get('/', function () {return view('estacionapp.inicio');})->name('inicio')->middleware('guest');
-Route::get('/registro', 'Auth\RegisterController@index')->name('registro');
-Route::get('login', function () {return view('estacionapp.login');})->name('login')->middleware('guest');
+Route::middleware(['guest'])->group(function () {
+
+    Route::get('/', 'guest\GuestController@start')->name('inicio');
+    Route::get('/login', 'guest\GuestController@login')->name('login');
+    Route::get('/registro', 'Auth\RegisterController@index')->name('registro');
+});
+
+
 
 
 
 /*RUTAS CON SESSION*/
-Route::get('/roles', 'RolesController@index')->name('roles')->middleware(['verify' => true]);
 
-Route::get('/conductor', 'conductorController@index')->name('conductor');
-Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
+Route::middleware(['auth','verified'])->group(function () {
 
+    Route::get('/roles', 'RolesController@index')->name('roles');
 
-	Route::get('/administracion', 'AdministracionController@index')->name('administracion'); //**Carga la vista administrador */
-    Route::get('/dtbl.users', 'AdministracionController@getUsers')->name('datatable.users');//**el jquery se encarga de traer de getUser las variables a mostrar */
-    Route::get('/pdf.users','AdministracionController@pdfUsers')->name('pdf.users'); //**genera el pdf en base a la vista reporteUsuario.blade */
-    Route::get('/xlsx.users','AdministracionController@xlsxExport')->name('xlsx.users'); /**genera el excel en base al modelo User */
-//RUTAS PRUEBAS
+    Route::get('/conductor', 'conductorController@index')->name('conductor');
+    Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
 
 
-    Route::get('reserva', function() {return view('estacionapp.session.conductor.generarReserva');})->name('reserva'); 
-    Route::get('/admin', function() {return view('estacionapp.administrador.administrador');})->name('admin'); 
-    Route::get('/misreservas', function() {return view('estacionapp.session.conductor.misReservas');})->name('misreservas'); 
-
-    Route::get('/qread','ReadqrController@read');
 
     /*RESERVA EXPRESS*/
     Route::get('/express', 'reserves\ExpressController@create')->name('express');
@@ -49,22 +45,27 @@ Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
     Route::post('/diarias/', 'reserves\DayliController@create')->name('cdiaria');
 
     /*RESERVA MENSUAL*/
-    Route::get('/mensual', 'reserves\mensualController@index')->name('mensual');
+
+    Route::get('reserva','user\UserController@reservation')->name('reserva');         
 
 
-    /*RUTAS--CON--SESSION*/
+    Route::get('/misreservas','user\UserController@myReservation')->name('misreservas');
 
+    Route::get('datosUsuario', 'user\UserController@dateUser')->name('datosUsuario');
 
+    Route::get('/administracion', 'AdminController@index')->name('administracion'); 
+    //**el jquery se encarga de traer de getUser las variables a mostrar */
+    Route::get('/dtbl.users', 'AdminController@getUsers')->name('datatable.users');
+    //**genera el pdf en base a la vista reporteUsuario.blade */
+    Route::get('/pdf.users','AdminController@pdfUsers')->name('pdf.users'); 
+    /**genera el excel en base al modelo User */
+    Route::get('/xlsx.users','AdminController@xlsxExport')->name('xlsx.users'); 
 
-Route::get('datosUsuario', function() {
-    return view('estacionapp.session.conductor.datosUsuario');
-})->name('datosUsuario'); 
+    Route::get('/qread','ReadqrController@read');
 
-Route::get('scanner', function() {
-    return view('estacionapp.session.recepcion.lectorQr');
-})->name('scanner');
+    Route::get('scanner', function() {return view('estacionapp.session.recepcion.lectorQr');})->name('scanner');
 
-Route::get('Registro/Automovil', function() {
-     return view ('estacionapp.registro.registro_auto'); 
- })->name('registro_automovil'); 
+    Route::get('Registro/Automovil', 'user\RegisterCarController@index')->name('registro_automovil'); 
+    Route::get('/lala', 'reserves\ExpressController@validates');
 
+});
