@@ -30,46 +30,6 @@ class ExpressController extends Controller
 		$id_reservetype = 1;
 		$reserve = new ReservationController();
 
-		$seat = new Seat();
-		$seats = DB::table('seat')->where('id_seat'  , $plazadisponible)->increment('state_seat');
-		
 		return $reserve->create($expiration , $tarifa , $tiporeserva , $plazadisponible , $activate_reserve ); // Retorna a ReservationController
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public function validates(Request $request) {
-		/* $query  Valida que la fecha dada en activate_reserve haya sido superada por la fecha actual */
-		$query = Reserve::where('activate_reserve', '<=' , Carbon::now())->where('expiration_reserve', '>=' ,Carbon::now())->get();
-		if (!$query->isEmpty()) {
-			# code...
-		foreach ($query as $query_result ) {
-
-			 //DB::table('seat')->where('id_seat', $query_result->id_seat)->increment('state_seat');//Se Ocupa la Plaza
-
-				# code...
-			}	
-
-		 	return $this->create($request);
-
-		 }else{
-		 	return $this->create($request);
-		 }
-		 
-		}
-
-
-
 		}

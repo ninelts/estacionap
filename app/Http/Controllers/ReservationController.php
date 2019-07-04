@@ -13,6 +13,7 @@ use App\qr_code;
 use App\Tariff;
 use App\ReserveType;
 use App\Http\Controllers\QrController;
+use App\ReserveState;
 
 class ReservationController extends Controller
 {
@@ -22,7 +23,7 @@ class ReservationController extends Controller
 
     }
 
-    public function create ( $expiration , $tiporeserva , $tarifa , $plazadisponible , $activate_reserve  ){
+    public function create ($expiration , $tiporeserva , $tarifa , $plazadisponible , $activate_reserve  ){
 
     	// Carbon::now()->addDays(2)->addHour(3)->addMinutes(20); Metodo para agregar dias horas y minutos
 		// subMinutes(20) elimina
@@ -34,7 +35,7 @@ class ReservationController extends Controller
     		if (!$plaza->isEmpty()) {
 
 
-    			$useronline = Auth::user()->id;
+    		$useronline = Auth::user()->id;
 			$content = uniqid().uniqid();  		   // Genera Codigo unico
 			$db_qr = new qr_code();
 			$db_qr->content_qrcode = $content;  //Se Genera insercion a codigo QR
@@ -52,7 +53,7 @@ class ReservationController extends Controller
 			$reserva->expiration_reserve = $expiration;
 			$reserva->activate_reserve = $activate_reserve;
 			$reserva->id_qrcode = $db_qr_last; //Busca el ultimo id del qr_code  
-
+			$reserva->id_reservestate = 2; //Se registra reserva como en espera
 
 
 			$reserva->save();
@@ -76,37 +77,29 @@ class ReservationController extends Controller
 
 
 	public function validates($content) {
-		/* $query  Valida que la fecha dada en activate_reserve haya sido superada por la fecha actual */
-		$query = Reserve::all()->where('activate_reserve', '<=' , Carbon::now())->where('expiration_reserve', '>=' , Carbon::now());    
-		dd(Carbon::now());
+
+		$carbon = Carbon::now();
+		/* $query  Valida que la fecha dada en activate_reserve haya sido superada por la fecha actual donde el estado de la reserva sea en espera , y la fecha de expiracion sea mayor a el tiempo actual */
+		$query = Reserve::all()->where('activate_reserve', '<=' , $carbon)->where('expiration_reserve', '>=' , $carbon )->where('id_reservestate' , 2);    
 		foreach ($query as $query_result ) {
-			if ($query_result->activate_reserve <= Carbon::now()) {
+			if ($query_result->activate_reserve <= $carbon) {
 
-			//	$a= DB::table('seat')->where('id_seat', $query_result->id_seat)->where('state_seat' , 0)->increment('state_seat');
-		 	 //Se Ocupa la Plaza
-				$s = $query_result->id_seat;
-				$seat = Seat::find($s);
-
-				$seat->state_seat = 1;
-
-				$seat->save();
-
+				// Actuliza el estado de la plaza a vacia 
+				Seat::where('id_seat' , $query_result->id_seat )->update(['state_seat' => 1]);
+				// Actualiza el estado de la reserva a inactiva 
+				Reserve::where('id_reserve' , $query_result->id_reserve)->update(['id_reservestate' => 1] );
 			}
 		}
-		
-		/* $query2  Valida que la fecha dada en expiration_reserve haya sido superada por la fecha actual */
-		$query2 = Reserve::all()->where('expiration_reserve', '<=' , Carbon::now());    
+
+		/* $query2  Valida que la fecha dada en expiration_reserve haya sido superada por la fecha actual donde el estado de la reserva sea activa */
+		$query2 = Reserve::all()->where('expiration_reserve', '<=' , $carbon)->where('id_reservestate' , 1);
+
 		foreach ($query2 as $query_result2 ) {
-		 		
 
-		 	// $b= DB::table('seat')->where('id_seat', $query_result2->id_seat)->where('state_seat' , 1)->decrement('state_seat'); //Se libera la plaza
-
-			$s = $query_result2->id_seat;
-			$seat = Seat::find($s);
-
-			$seat->state_seat = 0;
-
-			$seat->save();
+			// Actuliza el estado de la plaza a vacia 
+			Seat::where('id_seat' , $query_result2->id_seat )->update(['state_seat' => 0]);
+			// Actualiza el estado de la reserva a inactiva 
+			Reserve::where('id_reserve' , $query_result2->id_reserve)->update(['id_reservestate' => 0]);
 
 		}
 
