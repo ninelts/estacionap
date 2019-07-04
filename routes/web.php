@@ -47,11 +47,9 @@ Route::middleware(['auth','verified'])->group(function () {
     /*RESERVA MENSUAL*/
 
     Route::get('reserva','user\UserController@reservation')->name('reserva');         
-
-
     Route::get('/misreservas','user\UserController@myReservation')->name('misreservas');
-
     Route::get('datosUsuario', 'user\UserController@dateUser')->name('datosUsuario');
+
 
     Route::get('/administracion', 'AdminController@index')->name('administracion'); 
     //**el jquery se encarga de traer de getUser las variables a mostrar */
@@ -61,7 +59,6 @@ Route::middleware(['auth','verified'])->group(function () {
     /**genera el excel en base al modelo User */
     Route::get('/xlsx.users','AdminController@xlsxExport')->name('xlsx.users'); 
 
-    Route::get('/qread','ReadqrController@read');
 
     Route::get('scanner', function() {return view('estacionapp.session.recepcion.lectorQr');})->name('scanner');
 

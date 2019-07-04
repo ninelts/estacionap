@@ -4,23 +4,27 @@
 
 <div class="container section  animated fadeIn slower">
 
-    @if(session('QR'))
+    @if(!$reserves->isEmpty())
+          @foreach( $reserves as $reserve )
     <div class="row">
     <div class="col s12 m7">
       <div class="card yellow lighten-4">
         <div class="card-image">
-          <img src="{{session('QR')}}">
+          <img src="{{$reserve->qr_url}}">
         </div>
         <div class="card-content">
-            <p>Tipo Reserva:</p><span>Express</span>
-            <p>Fecha Reserva:</p><span>24-06-2019</span>
+            <p>Tipo Reserva:</p><span>{{$reserve->tariffs->name_tariff}}</span>
+            <p>Fecha Reserva:</p><span>{{$reserve->date_reserve}}</span>
             <p>Patente Auto:</p><span>FWBL49</span>
-            <p>Nombre Conductor:</p><span>JUANITO PEREZ</span>
+            <p>Nombre Conductor:</p><span>{{$reserve->users->name }} {{$reserve->users->last_name}}</span>
+            <p>Estado:</p><span>{{$reserve->reservestate->name_reservestate}}</span>
+
         </div>
       </div>
     </div>
   </div>
             
+          @endforeach
     @else
     <div class="row">
     <div class="col s12 m7">

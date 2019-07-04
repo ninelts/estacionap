@@ -5,6 +5,7 @@ use App\qr_code;
 use Illuminate\Http\Request;
 use  SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Auth;
+use App\Reserve;
 
 class QrController extends Controller
 {
@@ -14,11 +15,10 @@ class QrController extends Controller
         $this->middleware(['auth','verified']);  //Middleware
     }
 
-	public function create($content){
+	public function create($content , $dir , $name){
 
-		$dir    = 'img/Qr/'.Auth::user()->rut.'/'; // Ruta donde se guardara el Qr
-        $rut    = Auth::user()->rut; //Rut de la session
-        $name   = $rut.'_'.uniqid().'.png'; //nombre del archivo
+        
+
         $size   = 250; //Tamanio Qr en pixeles
         $merge  = '/public/img/parking.png'; 
         $cont   = $content; //contenido del Qr
@@ -35,7 +35,6 @@ class QrController extends Controller
         ->merge($merge)                 // Se incrusta una imagen al QR
         ->errorCorrection('H')          //Nivel de detalle de Codigo QR
         ->generate($cont , $dir.$name); //Contenido luego Se concatena el nombre de la ruta + el nombre del qr
-        
         return redirect('/misreservas')->with('QR',$dir.$name);
 	}
 
