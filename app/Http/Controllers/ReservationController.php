@@ -89,7 +89,7 @@ class ReservationController extends Controller
         ['expiration_reserve', '>=' , $carbon],
         ['id_reservestate' , 2]
         ])->get();
-
+        //master
 
        foreach ($query as $query_result ) {
           if ($query_result->activate_reserve <= $carbon) {
