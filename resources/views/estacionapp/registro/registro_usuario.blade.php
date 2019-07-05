@@ -14,7 +14,7 @@
      </div>
 @endif
 
-<form action="{{route('register')}}" method="POST">
+<form class="formulario" action="{{route('register')}}" method="POST">
 
     @csrf
     <h4>Registro Conductor</h4>

@@ -83,7 +83,7 @@
   @endauth 
 </ul>
 
-
+<div class="waves" style="height: 300px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-35.83,-68.58 C90.00,271.88 307.84,-110.03 502.54,42.92 L500.00,150.00 L-1.41,155.42 Z" style="stroke: none; fill: #fdd835;"></path></svg></div>
 
 
 @yield('content')
