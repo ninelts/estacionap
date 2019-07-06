@@ -33,7 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
         hoverEnabled: false
     });
 });
-
+document.addEventListener('DOMContentLoaded', function() {
+    var rDiaria = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(rDiaria);
+  });
 document.addEventListener("DOMContentLoaded", event => {
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
     Instascan.Camera.getCameras().then(cameras => {
