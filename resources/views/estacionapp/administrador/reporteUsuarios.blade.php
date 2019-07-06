@@ -30,13 +30,16 @@
             background-color: #ffcc00;
             color: white;
         }
-        #tituloUsuarios{
+
+        #tituloUsuarios {
             font-family: 'Oswald', sans-serif;
         }
-        .header-repo img{
+
+        .header-repo img {
             width: 200px;
         }
-        .header-repo h1{
+
+        .header-repo h1 {
             text-align: center;
         }
     </style>

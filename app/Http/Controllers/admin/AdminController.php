@@ -15,12 +15,33 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','verified']);  //Middleware    }
+        //Middleware
+        $this->middleware(['auth','verified']);
+    }
 
     public function index(Request $request) //**verifica el rol para mostrar la vista de administrador */
     {
         $request->user()->authorizeRoles(['admin']);
         return view('estacionapp.administrador.administrador');
+    }
+    public function showUsers(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']);
+        return view('estacionapp.administrador.listaUsuarios');
+    }
+    public function formAgregarUsuario(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']);
+        return view('estacionapp.administrador.agregarUsuarios');
+    }
+    public function addUsers(Request $request)
+    {
+        $request->user()->authorizeRoles(['admin']);
+        $datosUsuario=request()->all();
+        // dd($datosUsuario);
+        return response()->json($datosUsuario);
+        // User::insert($datosUsuario);
+        // return view('estacionapp.administrador.listaUsuarios');
     }
     public function getUsers() //**trae las variables a mostrar en reporte */
     {

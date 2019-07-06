@@ -61,13 +61,13 @@
 
                             <ul>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{route('listado_usuarios')}}">
                                         <i class="fas fa-list"></i>
                                         Ver Todos
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{route('agregar_usuarios')}}">
                                         <i class="fas fa-plus"></i>
                                         Agregar Nuevo
                                     </a>
