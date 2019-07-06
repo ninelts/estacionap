@@ -1,9 +1,9 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="container">
+<section class="container section animated fadeIn slower">
     <div class="row">
-        <form class="col s12" action="{{route('login')}}" method="POST">
+        <form class="formulario col s12" action="{{route('login')}}" method="POST">
         @csrf
             <h1>Iniciar Sesion</h1>
             @if(session('status'))
@@ -44,5 +44,6 @@
             </div>
         </form>
     </div>
-</div>
+</section>
+
 @endsection

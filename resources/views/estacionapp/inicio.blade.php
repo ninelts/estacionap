@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 <html class="no-js" lang="">
 
 <head>
@@ -36,7 +36,7 @@
 
       <video src="video/bg-login-movil.mp4" autoplay loop muted playsinline></video>
     </div>
-
+    <div class="opacidad">
     <div class="botones">
       <div class="logo">
         <img class="responsive-img img-logo" src="img/icono-512x512-2.png" alt="">
@@ -44,6 +44,8 @@
       <a href="{{route('login')}}" class="boton inicio waves-effect waves-light">Iniciar Sesión</a>
       <a href="{{route('registro')}}" class="boton">Registrarse</a>
     </div>
+    </div>
+
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
