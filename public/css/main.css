@@ -110,7 +110,7 @@ textarea {
    ========================================================================== */
 
  :root {
-    --primario: #fdd835;
+    --primario: #f3d516;
     --secundario: #455a64;
     --tercero: #000000;
     --texto1: #ffffff;
@@ -129,6 +129,9 @@ html {
 *:before,
 *:after {
     box-sizing: inherit;
+}
+body{
+    background-color: #f4f4f4;
 }
 
 
@@ -397,6 +400,7 @@ form .link:hover {
     color: var(--primario);
     cursor: pointer;
     border: 2px solid var(--primario);
+    box-shadow: 5px 5px 2px var(--sombra);
 }
 
 

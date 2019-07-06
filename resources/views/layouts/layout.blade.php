@@ -26,6 +26,7 @@
 </head>
 <body>
   <nav>
+<div class="container">
   <div class="nav-wrapper">
     <a href="#" class="brand-logo">EstacionaPP</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -49,6 +50,7 @@
   @endauth 
    <a href="{{route('inicio')}}" class="back-page left  hide-on-med-and-up"><i class="fas fa-arrow-left"></i></a>
  </div>
+</div>
 
 </nav>
 <ul id="slide-out" class="sidenav">
