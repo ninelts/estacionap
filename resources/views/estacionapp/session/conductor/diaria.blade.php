@@ -2,6 +2,7 @@
 
 
 @section('content')
+<section class="container section animated fadeIn slower">
 <h1>Lista de plazas</h1>
 @if(session('status'))
     <h5 class="center">{{session('status')}}</h5>
@@ -55,4 +56,5 @@
   @endforeach
   </ul>
 </div>
+</section>
 @endsection

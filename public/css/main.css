@@ -264,11 +264,28 @@ label input[type="checkbox"]:checked+span:not(.lever):before {
     box-shadow: none;
 }
 
+.formulario {
+    background-color: #ffffff;
+    padding: 0.1rem 1rem;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+/********REGISTRO**********/
+
 
 /******* INICIO SESION ********/
 
+.waves {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
 body {
-    /* background-color: var(--secundario); */
+    background-color: #e8e8e8;
     margin: 0;
     /* overflow-x: hidden; */
 }
@@ -276,15 +293,15 @@ body {
 .botones {
     margin: 0;
     padding: 0;
-    position: relative;
-    /* height: 100vh; */
+    /* position: relative; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 1;
-}   
-.botones .inicio{
+    /* z-index: 2; */
+}
+
+.botones .inicio {
     background-color: var(--primario);
 }
 
@@ -303,9 +320,18 @@ body {
     overflow: hidden;
 }
 
+.opacidad {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .4);
+    z-index: 2;
+}
+
 .video video {
     min-width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
 }
 
 .botones .logo {
@@ -400,7 +426,13 @@ form .link:hover {
     color: var(--primario);
     cursor: pointer;
     border: 2px solid var(--primario);
+<<<<<<< HEAD
     box-shadow: 5px 5px 2px var(--sombra);
+=======
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+>>>>>>> trabajo
 }
 
 

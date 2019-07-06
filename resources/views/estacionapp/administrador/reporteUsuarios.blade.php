@@ -33,15 +33,21 @@
         #tituloUsuarios{
             font-family: 'Oswald', sans-serif;
         }
+        .header-repo img{
+            width: 200px;
+        }
+        .header-repo h1{
+            text-align: center;
+        }
     </style>
     <title>Document</title>
 </head>
 
 <body>
-    <nav>
-        <img src="img/icono-512x512-2.png" width="150" height="125">
+    <div class="header-repo">
+        <img src="img/icono-512x512-2.png">
         <h1 id="tituloUsuarios">Usuarios Sistema</h1>
-    </nav>
+    </div>
     <div style="padding-top: 50px;">
         <table id="tblUsuarios">
             <thead>
