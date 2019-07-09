@@ -1,3 +1,9 @@
+if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('/sw.js');
+}
+
+
+
 function editarcampos() {
 
     document.getElementById('txtNombre').contentEditable = true;
@@ -17,7 +23,7 @@ function cancelarEditar() {
     location.reload();
 }
 
-$(document).ready(function() {
+/* $(document).ready(function() {
     $('input.autocomplete').autocomplete({
         data: {
             "Apple": null,
@@ -25,7 +31,7 @@ $(document).ready(function() {
             "Google": 'https://placehold.it/250x250'
         },
     });
-});
+}); */
 document.addEventListener('DOMContentLoaded', function() {
     var btnFloat = document.querySelectorAll('.fixed-action-btn');
     var instances = M.FloatingActionButton.init(btnFloat, {
@@ -36,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     var rDiaria = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(rDiaria);
-  });
+});
 document.addEventListener("DOMContentLoaded", event => {
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
     Instascan.Camera.getCameras().then(cameras => {
