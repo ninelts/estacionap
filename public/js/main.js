@@ -1,3 +1,15 @@
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+}
+
 function editarcampos() {
 
     document.getElementById('txtNombre').contentEditable = true;
@@ -36,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     var rDiaria = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(rDiaria);
-  });
+});
 document.addEventListener("DOMContentLoaded", event => {
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
     Instascan.Camera.getCameras().then(cameras => {
