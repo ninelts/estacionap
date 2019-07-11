@@ -17,7 +17,6 @@ const APP_SHELL = [
     '../js/main.js',
     'video/bg-login-movil.mp4',
     'img/icono-512x512-2.png',
-    'resources/view/estacionapp/login.blade.php',
     'registro_usuario.blade.php',
     'js/sw-utils.js',
     'site.webmanifest'
