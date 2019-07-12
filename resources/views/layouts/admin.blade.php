@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>AdminFlex</title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.0/normalize.css">
     <link href="https://fonts.googleapis.com/css?family=Oswald|Port+Lligat+Sans" rel="stylesheet">
     <link rel="stylesheet" href="css/fontawesome-all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/b-1.5.6/b-flash-1.5.6/datatables.min.css" />
 </head>
+
 <body>
 
-<div class="pagina">
-    <header class="header">
+    <div class="pagina">
+        <header class="header">
             <div class="nombre-sitio">
                 <p class="escritorio">EstacionaPP</p>
                 <p class="movil">AP</p>
@@ -26,25 +31,25 @@
                 </div>
                 <div class="menu-derecho">
                     <div class="mensajes caja">
-                            <a href="#">
-                                <i class="fas fa-comment-alt"></i>
-                                <span>20</span>
-                            </a>
-                    </div>  
+                        <a href="#">
+                            <i class="fas fa-comment-alt"></i>
+                            <span>20</span>
+                        </a>
+                    </div>
                     <div class="mensajes caja">
-                            <a href="#">
-                                <i class="fas fa-bell"></i>
-                                <span>10</span>
-                            </a>
-                    </div>  
-                    <div class="cerrar caja" >
+                        <a href="#">
+                            <i class="fas fa-bell"></i>
+                            <span>10</span>
+                        </a>
+                    </div>
+                    <div class="cerrar caja">
                         <a href="{{ url('/logout') }}">Cerrar Sesion</a>
                     </div>
                 </div>
             </div>
-    </header>
-    <main class="contenedor-principal">
-        <aside class="sidebar">
+        </header>
+        <main class="contenedor-principal">
+            <aside class="sidebar">
                 <div class="usuario">
                     <img src="img/usuario.svg">
                     <p>Bienvenid@: <span>Admin</span></p>
@@ -162,10 +167,14 @@
                         </li>
                     </ul>
                 </div>
-        </aside>
-@yield('content');
+            </aside>
+            @yield('content')
 
-<script src="js/admin.js" async defer></script>
-<script src="https://kit.fontawesome.com/80c7d27d36.js"></script>
+            <script src="js/admin.js" async defer></script>
+            <script src="https://kit.fontawesome.com/80c7d27d36.js"></script>
+            <script type="text/javascript"
+                src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/b-1.5.6/b-flash-1.5.6/datatables.min.js">
+            </script>
 </body>
+
 </html>

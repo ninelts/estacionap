@@ -56,22 +56,25 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/administracion', 'admin\AdminController@index')->name('administracion');
     
     //**muestra listado usuarios */
-    Route::get('/listadoUsuarios', 'admin\AdminController@showUsers')->name('listado_usuarios');
+    Route::get('/listadoUsuarios', 'admin\CrudUserController@index')->name('listado_usuarios');
 
-    //**formulario agregar usuarios */
-    Route::get('/agregarUsuarios', 'admin\AdminController@formAgregarUsuario')->name('agregar_usuarios');
+    //** MUESTRA formulario agregar usuarios CAMBIAR NOMBRE DE FUNCION */
+    Route::get('/agregarUsuarios', 'admin\CrudUserController@formAgregarUsuario')->name('agregar_usuarios');
 
-    //**almacena usuarios */
-    Route::post('/almacenaUsuarios', 'admin\AdminController@addUsers')->name('almacenar_usuarios');
+    //**ELIMINA USUARIO*/
+    Route::post('/eliminaUsuarios', 'admin\CrudUserController@deleteUsers')->name('eliminar_usuarios');
+
+    //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
+    Route::post('/almacenaUsuarios', 'admin\CrudUserController@addUsers')->name('almacenar_usuarios');
 
     //**el jquery se encarga de traer de getUser las variables a mostrar */
-    Route::get('/dtbl.users', 'admin\AdminController@getUsers')->name('datatable.users');
+    Route::get('/dtbl.users', 'admin\CrudUserController@getUsers')->name('datatable.users');
     
     //**genera el pdf en base a la vista reporteUsuario.blade */
-    Route::get('/pdf.users', 'admin\AdminController@pdfUsers')->name('pdf.users');
+    Route::get('/pdf.users', 'admin\CrudUserController@pdfUsers')->name('pdf.users');
 
     /**genera el excel en base al modelo User */
-    Route::get('/xlsx.users', 'admin\AdminController@xlsxExport')->name('xlsx.users');
+    Route::get('/xlsx.users', 'admin\CrudUserController@xlsxExport')->name('xlsx.users');
 
     //**RECEPCION */
     Route::get('/qread', 'ReadqrController@read');
