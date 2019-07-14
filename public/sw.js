@@ -11,6 +11,7 @@ const INMUTABLE_CACHE = 'inmutable-v1';
 const APP_SHELL = [
     '/',
     'index.php',
+    'resources/views/estacionapp/sesion/conductor/conductor.blade.php',
     '../css/main.css',
     '../img/bg-login-movil.png',
     '../img/usuario.jpg',
@@ -20,9 +21,9 @@ const APP_SHELL = [
     '/registro',
     'js/sw-utils.js',
     'site.webmanifest',
-    '/verify',
     '/guest',
-    '/conductor'
+    '/conductor',
+    '/login'
 
 ];
 
