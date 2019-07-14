@@ -19,7 +19,10 @@ const APP_SHELL = [
     'img/icono-512x512-2.png',
     '/registro',
     'js/sw-utils.js',
-    'site.webmanifest'
+    'site.webmanifest',
+    '/verify',
+    '/guest',
+    '/conductor'
 
 ];
 
