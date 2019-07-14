@@ -8,13 +8,14 @@
     </div>
 </div>
 
-<script type="text/javascript" src="js/instascan.min.js"></script>
-
 <script type="text/javascript">
+    
+
+
     let opts = {
   // Whether to scan continuously for QR codes. If false, use scanner.scan() to manually scan.
   // If true, the scanner emits the "scan" event when a QR code is scanned. Default true.
-  continuous: true,
+  continuous: false,
   
   // The HTML element to use for the camera's video preview. Must be a <video> element.
   // When the camera is active, this element will have the "active" CSS class, otherwise,
@@ -28,7 +29,7 @@
   
   // Whether to include the scanned image data as part of the scan result. See the "scan" event
   // for image format details. Default false.
-  captureImage: true,
+  captureImage: false,
   
   // Only applies to continuous mode. Whether to actively scan when the tab is not active.
   // When false, this reduces CPU usage when the tab is not active. Default true.
@@ -41,28 +42,8 @@
   // Only applies to continuous mode. The period, in rendered frames, between scans. A lower scan period
   // increases CPU usage but makes scan response faster. Default 1 (i.e. analyze every frame).
   scanPeriod: 1
-}; 
-	//git
-    Instascan.Camera.getCameras().then(cameras => {
-    let scanner = new Instascan.Scanner(opts);
-    scanner.addListener('scan', content => {
-    scanner.stop();
-    window.location="{{URL::to('/')}}";
-        document.getElementById("ver").innerHTML = content;
-    });
-        if (cameras.lenght > 0) {
-            scanner.camera = cameras[0];
-            scanner.start();
-        } else {
-            scanner.camera = cameras[1];
-            scanner.start();
-        }
-
-    }).catch(e => console.error(e));
-
-
+};
 </script>
 
-<div id="ver"> </div>
 @endsection
 

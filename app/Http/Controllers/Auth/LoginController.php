@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Redirect;
 
 class LoginController extends Controller
 {
@@ -24,7 +26,7 @@ class LoginController extends Controller
     public $maxAttempts = 3;   // Maximo de intentos
     public $decayMinutes = 10;  // Bloqueo en minutos   
 
-     public function username()
+    public function username()
 
     {
         return 'rut'; 
@@ -49,35 +51,38 @@ class LoginController extends Controller
 
     }
 
-    public function sendFailedLoginResponse(Request $request)
+    public function sendFailedLoginResponse(Request $request) //Funcion intentos Fallidos
     {   
 
 
         $attempts = session()->get('login.attempts', 1); // obtener intentos, default: 0
         if ($attempts<=2) {
         session()->put('login.attempts', $attempts + 1); // incrementrar intentos
-        return redirect()->back()->with('status','Usuario o contraseña Incorrecta')->with('status2','
+        return Redirect::back()->with('status','Usuario o contraseña Incorrecta')->with('status2','
             Intentos :' .$attempts);
-            
-        }else{
+
+    }else{
 
 
-             return redirect()->back()->with('status','Su Cuenta se ha bloqueado temporalmente')->with('status',$this->decayMinutes.':Minutos');
-                
-
-        }
-    }
+       return Redirect::back()->with('status','Su Cuenta se ha bloqueado temporalmente')->with('status',$this->decayMinutes.':Minutos');
 
 
+   }
+}
 
 
 
-    protected function authenticated(Request $request, $user)
-    {
+
+
+protected function authenticated(Request $request)
+{
         session()->forget('login.attempts');    //Invacamos a la funcion aunteticado una ves antenticado se manda a olvidar el numero de intentos para la session //
-
     }
 
+    protected function logout(Request $request){
+        Auth::logout();
+        return Redirect::route('inicio');
+    }
 }
 
 

@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','verified']);  //Middleware    }
-
+}
     public function index(Request $request) //**verifica el rol para mostrar la vista de administrador */
     {
         $request->user()->authorizeRoles(['admin']);

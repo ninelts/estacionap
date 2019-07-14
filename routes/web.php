@@ -14,6 +14,8 @@
 Auth::routes(['verify' => true]);
 
 /*RUTAS SIN SESSION*/
+
+    //
 Route::middleware(['guest'])->group(function () {
 
     Route::get('/', 'guest\GuestController@start')->name('inicio');
@@ -30,7 +32,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth','verified'])->group(function () {
 
     Route::get('/roles', 'RolesController@index')->name('roles');
-
+    Route::get('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/conductor', 'conductorController@index')->name('conductor');
     Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
 
@@ -51,16 +53,16 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('datosUsuario', 'user\UserController@dateUser')->name('datosUsuario');
 
 
-    Route::get('/administracion', 'AdminController@index')->name('administracion'); 
+    Route::get('/administracion', 'admin\AdminController@index')->name('administracion'); 
     //**el jquery se encarga de traer de getUser las variables a mostrar */
-    Route::get('/dtbl.users', 'AdminController@getUsers')->name('datatable.users');
+    Route::get('/dtbl.users', 'admin\AdminController@getUsers')->name('datatable.users');
     //**genera el pdf en base a la vista reporteUsuario.blade */
-    Route::get('/pdf.users','AdminController@pdfUsers')->name('pdf.users'); 
+    Route::get('/pdf.users','admin\AdminController@pdfUsers')->name('pdf.users'); 
     /**genera el excel en base al modelo User */
-    Route::get('/xlsx.users','AdminController@xlsxExport')->name('xlsx.users'); 
-
+    Route::get('/xlsx.users','admin\AdminController@xlsxExport')->name('xlsx.users'); 
 
     Route::get('scanner', function() {return view('estacionapp.session.recepcion.lectorQr');})->name('scanner');
+
 
     Route::get('Registro/Automovil', 'user\RegisterCarController@index')->name('registro_automovil'); 
     Route::get('/lala', 'reserves\ExpressController@validates');

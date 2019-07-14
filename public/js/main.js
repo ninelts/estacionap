@@ -45,25 +45,3 @@ document.addEventListener('DOMContentLoaded', function() {
         hoverEnabled: false
     });
 });
-document.addEventListener('DOMContentLoaded', function() {
-    var rDiaria = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(rDiaria);
-});
-document.addEventListener("DOMContentLoaded", event => {
-    let scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
-    Instascan.Camera.getCameras().then(cameras => {
-        if (cameras.lenght > 0) {
-            scanner.camera = cameras[0];
-            scanner.start();
-        } else {
-            scanner.camera = cameras[1];
-            scanner.start();
-        }
-
-    }).catch(e => console.error(e));
-
-    scanner.addListener('scan', content => {
-        window.open(content);
-    });
-
-});
