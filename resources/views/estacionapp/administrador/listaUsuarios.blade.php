@@ -45,10 +45,10 @@
                     {{$user->phone}}
                 </td>
                 <td>
-                    <button class="" data-id="{{$user->id}}" data-name="{{$user->name}}">
+                    <button class="" data-id="{{$user->id}}" data-name="{{$user->name}}" id="edit_user">
                         <span class=""></span> Edit
                     </button>
-                    <button class="delete-modal" data-id="{{$user->id}}" data-name="{{$user->name}}">
+                    <button class="delete-modal" data-id="{{$user->id}}" data-name="{{$user->name}}" id="btnEliminar">
                         <span class=""></span> Delete
                     </button>
                 </td>
@@ -60,14 +60,10 @@
     <a href="{{route('xlsx.users')}}" class="btn"></i> <span>xlsx</span> </a>
 </div>
 
-
-
-
-
 <!--Agregar Modal Structure -->
-<div id="Addmodal1" class="modal">
+<div id="modal3" class="modal">
     <div class="modal-content">
-        <h4>Agregar</h4>
+        <h4>Agregar usuario</h4>
         <form action="" method="">
             <div class="col s12">
                 <div class="row">
@@ -160,7 +156,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s12">
                         <input id="contrasena" type="password" name="password" class="validate">
                         <label for="contrasena">Contraseña</label>
                         @if($errors->get('password'))
@@ -176,57 +172,34 @@
                 </div>
         </form>
     </div>
-    <div class="modal-footer">
-        <button id="guardarArticulo" onclick="guardarArticulo({{$user->id}})" class="btn btn-outline btn-danger"><i
-                class="fa fa-plus"></i>
-            </button>
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="btnCancelarAdd">Cancelar</a>
+    <div class="modal-footer" id="modal-footerc">
+        <button id="btn-save" type="button" class="waves-effect waves-teal btn-flat" value="crear">
+            <i class="fa fa-plus"></i><span>Guardar</span>
+        </button>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="btnCancelar3">Cancelar</a>
     </div>
 </div>
 <!-- Agregar Modal Structure -->
 
 
 <!--Eliminar Modal Structure -->
-<div id="modal1" class="modal">
+{{-- <div id="modal1" class="modal">
     <div class="modal-content">
         <h4>Eliminar</h4>
         <p>¿Está seguro que desea eliminar a
             <input type="text" name="" id="dname" class="dname" disabled>
         </p>
-        <p>con id
-            <input type="text" class="did" id="did" disabled>
-        </p>?
-        <p>con token
-            <input type="text" class="did" id="dtoken" disabled> {% csrf_token %}
-        </p>?
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer" id="modal-footerd">
         <button id="eliminarArticulo" onclick="eliminarArticulo({{$user->id}})" class="btn btn-outline btn-danger"><i
-                class="fa fa-trash"></i></button>
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="btnCancelar">Cancelar</a>
-    </div>
+    class="fa fa-trash"></i></button>
+<a href="#!" class="modal-close waves-effect waves-green btn-flat" id="btnCancelar">Cancelar</a>
 </div>
+</div> --}}
 <!-- Eliminar Modal Structure -->
 
 <script type="text/javascript">
-
-
-        /*funcion boton MOSTRAR CREATE*/
-    /* $(document).on('click', '.add-modal', function() {
-        $('#Addmodal1').show(); //muestra modal id Addmodal1 -> create
-    }); */
-        /*funcion boton MOSTRAR CREATE*/
-
-
-        /*funcion boton cancelar DELETE*/
-    $('.modal-footer').on('click', '#btnCancelarAdd', function() {
-        $('#Addmodal1').hide(); //oculta modal id modal1
-    });
-        /*funcion boton cancelar DELETE*/
-
-    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-
-function eliminarArticulo(id) {
+    function eliminarArticulo(id) {
         $.ajax({
             url: '/eliminaUsuarios',
             type: 'POST',
@@ -236,48 +209,51 @@ function eliminarArticulo(id) {
                 _token: '{!! csrf_token() !!}',
             },
             success: function(result) {
-                window.alert("Usuario eliminado exitoso");
+                window.alert("Usuario eliminado exitosamente");
                 $('#modal1').hide(); //oculta modal id modal1
-                $(".user" + id).remove();
+                $(".user" + id).remove(); //elimina html(fila tr) por clase user+id
             }
         });
     }
-    
-    $(document).on('click', '.delete-modal', function() {
-        document.getElementById("dname").value = ($(this).data('name')); //setea el id como texto al span class .did
-        document.getElementById("did").value = ($(this).data('id')); //setea el id como texto al span class .did
-        $('#modal1').show(); //muestra modal id modal1
-    });
-
     $(document).ready(function() {
 
-    $('#tblUsers').DataTable({}); //inicializa datatable
-    
-    /*$('.modal-footer').on('click', '.delete', function() {
-        var idUser = document.getElementById("did").value;
-        $.ajax({
-            type:'POST',
-            url:'/eliminaUsuarios',
-            data:{
-                '_token': $('input[name=_token]').val(),
-                'id': document.getElementById("did").value
-            },
-            success: function(data){
-                $('.user' + $('.did').text()).remove();
-            }
-            // window.alert(idUser);
-            // $('#modal1').hide(); //oculta modal id modal1
-        });
-    });*/
 
-    $('.modal-footer').on('click', '#btnCancelar', function() {
-        $('#modal1').hide(); //oculta modal id modal1
+        window.addEventListener("keyup",function(e){
+            if(e.keyCode==27) {
+            document.getElementById("modal3").style.display="none";
+        }
+    });
+
+        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+        $('#tblUsers').DataTable({}); //inicializa datatable
+        $(document).on('click', '.delete-modal', function() {
+
+            // document.getElementById("dname").value = ($(this).data('name')); //setea el id como texto al span class .did
+            // document.getElementById("did").value = ($(this).data('id')); //setea el id como texto al span class .did
+            // $('#modal1').show(); //muestra modal1 ELIMINAR
+            var nombre = ($(this).data('name'));
+            var resp = confirm("Desea eliminar a "+nombre);
+            if (resp == true) {
+                eliminarArticulo({{$user->id}});
+            } else{
+
+            }
+        });
+        $('#edit_user').click(function(){
+
+            $('#modal3').show(); //muestra modal3 EDITAR es el mismo modal
+            $('#rut').val(data.id);
+            $('#nombre').val(data.name);
+            $('#apellido').val(data.email);
+        });
+
+        $('#btnAgregar').click(function(){
+            $('#modal3').show(); //muestra modal3 AGREGAR
+        });
+
+    $('#btnCancelar3').click(function(){
+        $('#modal3').hide(); //oculta modal3 AGREGAR
     });
 });
-
-
 </script>
-
-
-
 @endsection
