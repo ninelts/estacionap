@@ -46,7 +46,8 @@
     Instascan.Camera.getCameras().then(cameras => {
     let scanner = new Instascan.Scanner(opts);
     scanner.addListener('scan', content => {
-    
+    scanner.stop();
+    window.location="{{URL::to('/')}}";
         document.getElementById("ver").innerHTML = content;
     });
         if (cameras.lenght > 0) {
