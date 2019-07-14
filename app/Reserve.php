@@ -33,7 +33,7 @@ class Reserve extends Model
     //Relacion muchos a uno QR'S
     public function qrcodes()
     {
-        return $this->belongsTo(Qrcode::class, 'id_qrcode' , 'id_reserve');
+        return $this->belongsTo(Qrcode::class, 'id_qrcode' , 'id_qrcode');
     }
 
     public function reservestate(){

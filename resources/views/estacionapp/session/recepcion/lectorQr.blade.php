@@ -1,6 +1,27 @@
 @extends('layouts.layout')
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+@if(session('state'))
+@foreach( session('state') as $state )
+      <div class="row">
+    <div class="col s12 m7">
+      <div class="card yellow lighten-4">
+        <div class="card-image">
+        </div>
+        <div class="card-content">
+
+            <p>Estado:</p><span>{{$state->state->name_reservestate}}</span>
+
+        </div>
+      </div>
+    </div>
+  </div>  
+  @endforeach
+  @else
+
 <div class="container section animated fadeIn slower">
   <h1>Scanner QR</h1>
   <div class="video-scan">
@@ -67,13 +88,16 @@
 
    type:'POST',
 
-   url:'localhost:8000/ajaxQR',
+   url:'/ajaxQR',
 
-   data:{qr:qr},
+   data:{
+    qr:qr,
+    _token: '{!! csrf_token() !!}'
+   },
 
-   success:function(data){
+   success:function(message){
 
-    alert(data.success);
+    alert(message.message);
   },
   error:function(data){
     alert('Error');
@@ -101,5 +125,6 @@
 
 
 <div id="ver" name ='qr'> </div>
+@endif
 @endsection
 

@@ -12,4 +12,9 @@ class qr_code extends Model
     [
         'count_qrcode'
     ];
+  public function reserves()
+    {
+        return $this->hasMany(Reserve::class , 'id_qrcode' , 'id_qrcode');
+    }
+
 }
