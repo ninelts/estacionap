@@ -64,7 +64,10 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('scanner', function() {return view('estacionapp.session.recepcion.lectorQr');})->name('scanner');
 
 
-    Route::get('Registro/Automovil', 'user\RegisterCarController@index')->name('registro_automovil'); 
-    Route::get('/lala', 'reserves\ExpressController@validates');
+    Route::get('Registro/Automovil','user\RegisterCarController@index')->name('registro_automovil'); 
+    Route::get('/lala','reserves\ExpressController@validates');
+
+    Route::post('/ajaxQR','QrController@read')->name('ajaxQR');
+
 
 });

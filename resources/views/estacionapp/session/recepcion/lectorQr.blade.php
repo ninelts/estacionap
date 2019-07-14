@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="container section animated fadeIn slower">
-    <h1>Scanner QR</h1>
-    <div class="video-scan">
-        <video id="preview" class="scanner"></video>
-    </div>
+  <h1>Scanner QR</h1>
+  <div class="video-scan">
+    <video id="preview" class="scanner"></video>
+  </div>
 </div>
 
 <script type="text/javascript" src="js/instascan.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-    let opts = {
+  let opts = {
   // Whether to scan continuously for QR codes. If false, use scanner.scan() to manually scan.
   // If true, the scanner emits the "scan" event when a QR code is scanned. Default true.
   continuous: true,
@@ -43,26 +43,63 @@
   scanPeriod: 1
 }; 
 	//git
-    Instascan.Camera.getCameras().then(cameras => {
+  Instascan.Camera.getCameras().then(cameras => {
     let scanner = new Instascan.Scanner(opts);
-    scanner.addListener('scan', content => {
-    scanner.stop();
-    window.location="{{URL::to('/')}}";
-        document.getElementById("ver").innerHTML = content;
-    });
-        if (cameras.lenght > 0) {
-            scanner.camera = cameras[0];
-            scanner.start();
-        } else {
-            scanner.camera = cameras[1];
-            scanner.start();
-        }
+    
 
-    }).catch(e => console.error(e));
+    scanner.addListener('scan', content => {
+      scanner.stop();
+      document.getElementById("ver").innerHTML = content;
+
+      $(document).ready(function(){
+  /* In laravel you have to pass this CSRF in meta for ajax request  */
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+});
+
+
+  var qr = content;
+
+  $.ajax({
+
+   type:'POST',
+
+   url:'localhost:8000/ajaxQR',
+
+   data:{qr:qr},
+
+   success:function(data){
+
+    alert(data.success);
+  },
+  error:function(data){
+    alert('Error');
+  }
+
+})
+    });
+    if (cameras.lenght > 0) {
+      scanner.camera = cameras[0];
+      scanner.start();
+    } else {
+      scanner.camera = cameras[1];
+      scanner.start();
+    }
+
+  }).catch(e => console.error(e));
 
 
 </script>
 
-<div id="ver"> </div>
+
+
+
+
+
+
+<div id="ver" name ='qr'> </div>
 @endsection
 

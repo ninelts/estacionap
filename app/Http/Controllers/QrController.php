@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use  SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Auth;
 use App\Reserve;
+use redirect;
 
 class QrController extends Controller
 {
@@ -38,5 +39,19 @@ class QrController extends Controller
         return redirect('/misreservas')->with('QR',$dir.$name);
 	}
 
+
+    public function read (Request $request){
+        if($request->ajax()) {
+        $expediente = Expediente::create($request->all());
+        return response()->json(['message' => 'Insertado correctamente']);
+    }else{
+        return redirect::route('/');
+    }
+        $read = $request->all();
+        dump($read);
+        return response()->json(['success'=>'Got Simple Ajax Request.']);
+
+
+    }
 
 }
