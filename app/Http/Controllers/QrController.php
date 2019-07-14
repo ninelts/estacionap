@@ -18,15 +18,15 @@ class QrController extends Controller
 	public function create($content , $dir , $name){
 
         
-
+        dump($dir);
         $size   = 250; //Tamanio Qr en pixeles
         $merge  = '/public/img/parking.png'; 
         $cont   = $content; //contenido del Qr
         
 
 
-        if (!file_exists($dir)) {  // Si El direcctorio de Guardado no existe 
-        mkdir($dir); //Mkdir crea la carpeta 
+        if (!file_exists($dir)){  // Si El direcctorio de Guardado no existe 
+        mkdir($dir , 0777 , true); //Mkdir crea la carpeta 
         }
 
 

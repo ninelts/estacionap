@@ -26,7 +26,7 @@ class ReservationController extends Controller
     public function create ($expiration , $tiporeserva , $tarifa , $plazadisponible , $activate_reserve  ){
 
     	// Carbon::now()->addDays(2)->addHour(3)->addMinutes(20); Metodo para agregar dias horas y minutos
-		// subMinutes(20) elimina
+		// subMinutes(20) eliminar
 
 
     		$plaza = Seat::where('state_seat', 0)->get(); // se consulta las pla	
@@ -34,9 +34,9 @@ class ReservationController extends Controller
     		
     		if (!$plaza->isEmpty()) {
 
-              $useronline = Auth::user()->id;
+      $useronline = Auth::user()->id;
 			$dir    = 'img/Qr/'.$useronline.'/'; // Ruta donde se guardara el Qr
-        	$name   = $useronline.'_'.uniqid().'.png'; //nombre del archivo
+      $name   = $useronline.'_'.uniqid().'.png'; //nombre del archivo
 
 			$content = uniqid().uniqid();  		   // Genera Codigo unico
 			$db_qr = new qr_code();
@@ -61,26 +61,9 @@ class ReservationController extends Controller
 
 
 
-
-				# code...
-
-           return $this->validates($content , $dir , $name);
-
-		 // Retorna al c
+          /*-------------VALIDACION------------------------------------------------------------------------------*/
 
 
-
-       } else {
-
-           $respuestamala = "Sin Reservas Disponibles ;(";
-           return view('estacionapp.session.conductor.express')->with('respuesta', $respuestamala);
-       }
-   }
-
-
-
-
-   public function validates($content , $dir , $name) {
 
        $carbon = Carbon::now();
        /* $query  Valida que la fecha dada en activate_reserve haya sido superada por la fecha actual donde el estado de la reserva sea en espera , y la fecha de expiracion sea mayor a el tiempo actual */
@@ -89,15 +72,15 @@ class ReservationController extends Controller
         ['expiration_reserve', '>=' , $carbon],
         ['id_reservestate' , 2]
         ])->get();
-
+        //master
 
        foreach ($query as $query_result ) {
           if ($query_result->activate_reserve <= $carbon) {
 
-				// Actuliza el estado de la plaza a vacia 
+        // Actuliza el estado de la plaza a vacia 
              Seat::where('id_seat' , $query_result->id_seat )
              ->update(['state_seat' => 1]);
-				// Actualiza el estado de la reserva a inactiva 
+        // Actualiza el estado de la reserva a inactiva 
              
              Reserve::where('id_reserve' , $query_result->id_reserve)
              ->update(['id_reservestate' => 1] );
@@ -112,10 +95,10 @@ class ReservationController extends Controller
 
      foreach ($query2 as $query_result2 ) {
 
-			// Actualiza el estado de la plaza a vacia 
+      // Actualiza el estado de la plaza a vacia 
       Seat::where('id_seat' , $query_result2->id_seat )
       ->update(['state_seat' => 0]);
-			
+      
             // Actualiza el estado de la reserva a inactiva 
       Reserve::where('id_reserve' , $query_result2->id_reserve)
       ->update(['id_reservestate' => 0]);
@@ -124,8 +107,21 @@ class ReservationController extends Controller
 
 
   $CreateQr =  new QrController();
-  return $CreateQr->create($content  , $dir , $name); 
-}
+  return $CreateQr->create($content  , $dir , $name);
+
+
+
+
+       } else {
+
+           $respuestamala = "Sin Reservas Disponibles ;(";
+           return view('estacionapp.session.conductor.express')->with('respuesta', $respuestamala);
+       }
+   }
+
+
+
+
 
 
 
