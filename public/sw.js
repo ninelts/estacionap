@@ -4,11 +4,9 @@ importScripts('js/sw-utils.js');
 
 
 
-const STATIC_CACHE = 'static-v1';
-const DYNAMIC_CACHE = 'dynamic-v1';
-const INMUTABLE_CACHE = 'inmutable-v1';
+var CACHE_NAME = 'my-site-cache-v1';
 
-const APP_SHELL = [
+var urlsToCache = [
     '/',
     'index.php',
     '../css/main.css',
@@ -19,7 +17,11 @@ const APP_SHELL = [
     'img/icono-512x512-2.png',
     '/registro',
     'js/sw-utils.js',
-    'site.webmanifest'
+    'site.webmanifest',
+    '/guest',
+    '/conductor',
+    '/login',
+    '/misreservas'
 
 ];
 
@@ -37,46 +39,71 @@ const APP_SHELL_INMUTABLE = [
     'js/instascan.min.js'
 ];
 
-self.addEventListener('install', e => {
-
-    const cacheStatic = caches.open(STATIC_CACHE).then(cache =>
-        cache.addAll(APP_SHELL));
-
-    const cacheInmutable = caches.open(INMUTABLE_CACHE).then(cache =>
-        cache.addAll(APP_SHELL_INMUTABLE));
-
-    e.waitUntil(Promise.all([cacheStatic, cacheInmutable]));
-});
-
-self.addEventListener('activate', e => {
-
-    const respuesta = caches.keys().then(keys => {
-        keys.forEach(key => {
-
-            if (key !== STATIC_CACHE && key.includes('static')) {
-                return caches.delete(key);
-            }
-        });
-    });
-
-    e.waitUntil(respuesta);
-});
-
-
-self.addEventListener('fetch', e => {
-
-    const respuesta = caches.match(e.request).then(res => {
-
-        if (res) {
-            return res;
-        } else {
-            return fetch(e.request).then(newRes => {
-
-                return actualizaCacheDynamico(DYNAMIC_CACHE, e.request, newRes);
-
+self.addEventListener('install', function (event) {
+    // Perform install steps
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(function (cache) {
+                console.log('Opened cache');
+                return cache.addAll(urlsToCache);
             })
-        }
-    });
+    );
+});
 
-    e.respondWith(respuesta);
+
+
+self.addEventListener('fetch', function (event) {
+    event.respondWith(
+        caches.match(event.request)
+            .then(function (response) {
+                // Cache hit - return response
+                if (response) {
+                    return response;
+                }
+
+                // IMPORTANT: Clone the request. A request is a stream and
+                // can only be consumed once. Since we are consuming this
+                // once by cache and once by the browser for fetch, we need
+                // to clone the response.
+                var fetchRequest = event.request.clone();
+
+                return fetch(fetchRequest).then(
+                    function (response) {
+                        // Check if we received a valid response
+                        if (!response || response.status !== 200 || response.type !== 'basic') {
+                            return response;
+                        }
+
+                        // IMPORTANT: Clone the response. A response is a stream
+                        // and because we want the browser to consume the response
+                        // as well as the cache consuming the response, we need
+                        // to clone it so we have two streams.
+                        var responseToCache = response.clone();
+
+                        caches.open(CACHE_NAME)
+                            .then(function (cache) {
+                                cache.put(event.request, responseToCache);
+                            });
+
+                        return response;
+                    }
+                );
+            })
+    );
+});
+self.addEventListener('activate', function (event) {
+
+    var cacheWhitelist = ['pages-cache-v1', 'blog-posts-cache-v1'];
+
+    event.waitUntil(
+        caches.keys().then(function (cacheNames) {
+            return Promise.all(
+                cacheNames.map(function (cacheName) {
+                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
+    );
 });

@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/b-1.5.6/b-flash-1.5.6/datatables.min.css"/>
 
-  <link rel="manifest" href="site.webmanifest">
+  <link rel="manifest" href="manifest.json" crossorigin = "use-credentials">
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
 
@@ -38,10 +38,7 @@
       @auth
       <li><a href="sass.html">{{ Auth::user()->name }}</a></li>
       <li>
-  <form id="logout-form" action="{{ route('logout') }}" method="POST">
-       @csrf
-  <li><a href="#!"><input class="waves-effect btn-salir" type="submit" name="Salir" value="Cerrar Sesión"></a></li>
-  </form>
+        <a href="{{route('logout')}}">Chupeta</a>
   </li>
       @endauth  
    </ul>
