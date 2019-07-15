@@ -1,6 +1,6 @@
 //import
 
-importScripts('js/sw-utils.js')
+importScripts('js/sw-utils.js');
 
 
 
