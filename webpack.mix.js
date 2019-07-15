@@ -20,13 +20,20 @@ mix.webpackConfig({
         new SWPrecacheWebpackPlugin({
             cacheId: 'pwa',
             filename: 'service-worker.js',
-            staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html}'],
+            staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html,png}'],
             minify: true,
             stripPrefix: 'public/',
             handleFetch: true,
             dynamicUrlToDependencies: { //you should add the path to your blade files here so they can be cached
                 //and have full support for offline first (example below)
-                '/': ['resources/views/estacionapp/inicio.blade.php']
+                '/': ['resources/views/estacionapp/inicio.blade.php',
+                        'resources/views/estacionapp/login.blade.php',
+                        'resources/views/estacionapp/registro/regitro_usuario.blade.php',
+                        'resources/views/estacionapp/session/conductor/conductor.blade.php',
+                        'resources/views/estacionapp/session/conductor/diaria.blade.php',
+                        'resources/views/estacionapp/session/conductor/express.blade.php',
+                        'routes/web.php'
+                    ]
                     // '/posts': ['resources/views/posts.blade.php']
             },
             staticFileGlobsIgnorePatterns: [/\.map$/, /mix-manifest\.json$/, /manifest\.json$/, /service-worker\.js$/],

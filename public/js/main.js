@@ -1,14 +1,14 @@
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js').then(function(registration) {
-        // Registration was successful
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, function(err) {
-        // registration failed :(
-        console.log('ServiceWorker registration failed: ', err);
-      });
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+        });
     });
-  }
+}
 
 function editarcampos() {
 
@@ -44,4 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
         direction: 'left',
         hoverEnabled: false
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var acordeonDiaria = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(acordeonDiaria);
 });
