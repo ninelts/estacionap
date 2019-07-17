@@ -9,12 +9,12 @@ var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
     '/',
     'index.php',
-    '../../css/main.css',
-    '/img/bg-login-movil.png',
-    '/img/usuario.jpg',
-    '/js/main.js',
-    'video/bg-login-movil.mp4',
-    'img/icono-512x512-2.png',
+    '../css/main.css',
+    '../img/bg-login-movil.png',
+    '../img/usuario.jpg',
+    '../js/main.js',
+    '../video/bg-login-movil.mp4',
+    '../img/icono-512x512-2.png',
     '../../routes/web.php'
 
 ];
