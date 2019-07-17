@@ -85,6 +85,7 @@ class CrudUserController extends Controller
     public function storeUsers(Request $request)
     {
         //$userId = $request->id;
+<<<<<<< HEAD
         // dump($request->id);
         // $role = Role::where('name', 'user')->first();
         // $user   =   User::updateOrCreate(
@@ -124,6 +125,22 @@ class CrudUserController extends Controller
 
 
 
+=======
+        dump($request->id);
+        $role = Role::where('name', 'user')->first();
+        $user   =   User::updateOrCreate(
+            ['id' => $request->id],
+            ['name' => $request->name,
+             'email' => $request->email,
+                     'rut' => $request->rut,
+                     'last_name' => $request->last_name,
+                     'password' => Hash::make($request->password),
+                     'phone' => $request->phone,
+                     'born' => $request->born
+                     ]                   
+        );
+        dump($user);
+>>>>>>> 5ae932984774cca100e7475455f925b45e8e1ff6
         $user->roles()->attach($role);  //Funcion para Agregar el rol y el id del usuario en la tabla pivote o muchos a muchos
 
 
