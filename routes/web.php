@@ -65,7 +65,10 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/eliminaUsuarios', 'admin\CrudUserController@deleteUsers')->name('eliminar_usuarios');
 
     //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
-    Route::post('/almacenaUsuarios', 'admin\CrudUserController@addUsers')->name('almacenar_usuarios');
+    Route::post('/almacenaUsuarios', 'admin\CrudUserController@storeUsers')->name('almacenar_usuarios');
+
+    //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
+    Route::post('/editaUsuarios', 'admin\CrudUserController@editUsers')->name('editar_usuarios');
 
     //**el jquery se encarga de traer de getUser las variables a mostrar */
     Route::get('/dtbl.users', 'admin\CrudUserController@getUsers')->name('datatable.users');
