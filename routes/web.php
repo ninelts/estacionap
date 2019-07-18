@@ -11,9 +11,11 @@
 |
 */
 
-Auth::routes(['verify' => true]);
 
+Auth::routes(['verify' => true]);
 /*RUTAS SIN SESSION*/
+
+    //
 Route::middleware(['guest'])->group(function () {
     Route::get('/', 'guest\GuestController@start')->name('inicio');
     Route::get('/login', 'guest\GuestController@login')->name('login');
@@ -28,7 +30,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('/roles', 'RolesController@index')->name('roles');
-
+    Route::get('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/conductor', 'conductorController@index')->name('conductor');
     Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
 
@@ -43,6 +45,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/diarias/', 'reserves\DayliController@create')->name('cdiaria');
 
     /*RESERVA MENSUAL*/
+
 
     //**CONDUCTOR */
     Route::get('reserva', 'user\UserController@reservation')->name('reserva');
@@ -64,23 +67,20 @@ Route::middleware(['auth','verified'])->group(function () {
     //**ELIMINA USUARIO*/
     Route::post('/eliminaUsuarios', 'admin\CrudUserController@deleteUsers')->name('eliminar_usuarios');
 
+
     //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
     Route::post('/almacenaUsuarios', 'admin\CrudUserController@storeUsers')->name('almacenar_usuarios');
+
 
     //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
     Route::post('/edicionUsuario', 'admin\CrudUserController@editeUser')->name('edita_usuario');
 
-    //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
-    Route::post('/editaUsuarios', 'admin\CrudUserController@editUsers')->name('editar_usuarios');
+ 
+    Route::get('/lala','reserves\ExpressController@validates');
 
-    //**el jquery se encarga de traer de getUser las variables a mostrar */
-    Route::get('/dtbl.users', 'admin\CrudUserController@getUsers')->name('datatable.users');
-    
-    //**genera el pdf en base a la vista reporteUsuario.blade */
-    Route::get('/pdf.users', 'admin\CrudUserController@pdfUsers')->name('pdf.users');
+    Route::post('/ajaxQR','QrController@read')->name('ajaxQR');
 
-    /**genera el excel en base al modelo User */
-    Route::get('/xlsx.users', 'admin\CrudUserController@xlsxExport')->name('xlsx.users');
+
 
     //**RECEPCION */
     Route::get('/qread', 'ReadqrController@read');

@@ -11,27 +11,34 @@ class Reserve extends Model
 
     //Relacion muchos a uno TARIFAS
     public function tariffs()
-    {
-        return $this->belongsTo('App\Tariff', 'id_tariff' , 'id_reserve');
+    {   
+        //se Setea el la llave foranea de la reserva y  luego la llave primaria de la tabla tarifas Arreglar!!
+        return $this->belongsTo(Tariff::class , 'id_tariff' , 'id_tariff' );
     }
     //Relacion muchos a uno TIPO RESERVAS
     public function reservetypes()
     {
-        return $this->belongsTo('App\ReserveType', 'id_reservetype' , 'id_reserve');
+        return $this->belongsTo(ReserveType::class , 'id_reservetype' , 'id_reserve');
     }
     //Relacion muchos a uno PLAZAS
     public function seats()
     {
-        return $this->belongsTo('App\Seat', 'id_seat' , 'id_reserve');
+        return $this->belongsTo(Seat::class, 'id_seat' , 'id_reserve');
     }
     //Relacion muchos a uno USUARIOS
     public function users()
     {
-        return $this->belongsTo('App\User', 'id_user' , 'id_reserve');
+        return $this->belongsTo(User::class, 'id_user' , 'id');
     }
     //Relacion muchos a uno QR'S
     public function qrcodes()
     {
-        return $this->belongsTo('App\Qrcode', 'id_qrcode' , 'id_reserve');
+        return $this->belongsTo(Qrcode::class, 'id_qrcode' , 'id_qrcode');
+    }
+
+    public function reservestate(){
+
+        return $this->belongsTo( ReserveState::class , 'id_reservestate' , 'id_reservestate');
+
     }
 }
