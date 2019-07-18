@@ -48,15 +48,15 @@ class CrudTariffController extends Controller
         $users = User::select(['rut','name','last_name','email','phone']);
         return Datatables::of($users)->make(true);
     }
-    public function pdfUsers()
+    public function pdfTariffs()
     {
-        $users = DB::table('users')->get();
-        $pdf = PDF::loadView('estacionapp.administrador.reporteUsuarios', ['users' => $users]);
+        $users = DB::table('tariff')->get();
+        $pdf = PDF::loadView('estacionapp.administrador.reporteTarifas', ['tariffs' => $tariffs]);
         $pdf->setPaper('letter', 'portrait');
         return $pdf->stream();
     }
     public function xlsxExport()
     {
-        return Excel::download(new UsersExport, 'ususarios_estacionapp.xlsx');
+        return Excel::download(new TariffsExport, 'tarifas_estacionapp.xlsx');
     }
 }

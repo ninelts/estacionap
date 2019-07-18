@@ -81,9 +81,10 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-chart-line"></i>
-                                Ventas
-                            </a>
+                            <a href="{{route('listado_usuarios')}}">
+                                        <i class="fas fa-list"></i>
+                                        Ver Todos
+                                    </a>
                             <ul>
                                 <li>
                                     <a href="#">
