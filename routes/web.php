@@ -11,8 +11,8 @@
 |
 */
 
-
 Auth::routes(['verify' => true]);
+
 /*RUTAS SIN SESSION*/
 
     //
@@ -65,8 +65,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/agregarUsuarios', 'admin\CrudUserController@formAgregarUsuario')->name('agregar_usuarios');
 
     //**ELIMINA USUARIO*/
-
-    Route::post('/eliminaUsuarios', 'admin\CrudUserController@deleteUsers')->name('eliminar_usuarios'); 
+    Route::post('/eliminaUsuarios', 'admin\CrudUserController@deleteUsers')->name('eliminar_usuarios');
 
 
 
@@ -77,15 +76,23 @@ Route::middleware(['auth','verified'])->group(function () {
     //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
     Route::post('/edicionUsuario', 'admin\CrudUserController@editeUser')->name('edita_usuario');
 
- 
-    Route::get('/lala','reserves\ExpressController@validates');
 
     Route::post('/ajaxQR','QrController@read')->name('ajaxQR');
 
 
+    //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
+    Route::post('/editaUsuarios', 'admin\CrudUserController@editUsers')->name('editar_usuarios');
+
+    //**el jquery se encarga de traer de getUser las variables a mostrar */
+    Route::get('/dtbl.users', 'admin\CrudUserController@getUsers')->name('datatable.users');
+    
+    //**genera el pdf en base a la vista reporteUsuario.blade */
+    Route::get('/pdf.users', 'admin\CrudUserController@pdfUsers')->name('pdf.users');
+
+    /**genera el excel en base al modelo User */
+    Route::get('/xlsx.users', 'admin\CrudUserController@xlsxExport')->name('xlsx.users');
 
     //**RECEPCION */
-    Route::get('/qread', 'ReadqrController@read');
     Route::get('scanner', function () {
         return view('estacionapp.session.recepcion.lectorQr');
     })->name('scanner');
