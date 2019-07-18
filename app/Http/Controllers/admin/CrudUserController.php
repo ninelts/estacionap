@@ -82,6 +82,24 @@ class CrudUserController extends Controller
     // }
 
 
+
+    public function editeUser(Request $request){
+
+        $user = User::find($request->id);
+        dump($user);
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->born = $request->born;
+        $user->rut = $request->rut;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        // $success_output = '<div class="alert alert-success">Data Updated</div>';
+        return response()->json($user);
+
+    }
+
     public function storeUsers(Request $request)
     {
         //$userId = $request->id;
@@ -101,24 +119,24 @@ class CrudUserController extends Controller
 
 
 
-        if($request->get('button_action') == 'insert')
-        {
-            $student = new Student([
-                'first_name'    =>  $request->get('first_name'),
-                'last_name'     =>  $request->get('last_name')
-            ]);
-            $student->save();
-            $success_output = '<div class="alert alert-success">Data Inserted</div>';
-        }
+        // if($request->get('button_action') == 'insert')
+        // {
+        //     $student = new Student([
+        //         'first_name'    =>  $request->get('first_name'),
+        //         'last_name'     =>  $request->get('last_name')
+        //     ]);
+        //     $student->save();
+        //     $success_output = '<div class="alert alert-success">Data Inserted</div>';
+        // }
 
-        if($request->get('button_action') == 'update')
-        {
-            $student = Student::find($request->get('student_id'));
-            $student->first_name = $request->get('first_name');
-            $student->last_name = $request->get('last_name');
-            $student->save();
-            $success_output = '<div class="alert alert-success">Data Updated</div>';
-        }
+        // if($request->get('button_action') == 'update')
+        // {
+        //     $student = Student::find($request->get('student_id'));
+        //     $student->first_name = $request->get('first_name');
+        //     $student->last_name = $request->get('last_name');
+        //     $student->save();
+        //     $success_output = '<div class="alert alert-success">Data Updated</div>';
+        // }
 
 
 

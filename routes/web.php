@@ -68,6 +68,9 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/almacenaUsuarios', 'admin\CrudUserController@storeUsers')->name('almacenar_usuarios');
 
     //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
+    Route::post('/edicionUsuario', 'admin\CrudUserController@editeUser')->name('edita_usuario');
+
+    //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
     Route::post('/editaUsuarios', 'admin\CrudUserController@editUsers')->name('editar_usuarios');
 
     //**el jquery se encarga de traer de getUser las variables a mostrar */

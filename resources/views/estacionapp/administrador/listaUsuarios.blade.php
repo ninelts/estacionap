@@ -200,8 +200,7 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script> --}}
 
 <script type="text/javascript">
-
-$(document).ready(function() {
+    $(document).ready(function() {
 /*FUNCION PARA OCULTAR MODAL CON TECLA ESC*/
     window.addEventListener("keyup",function(e){
         if(e.keyCode==27) {
@@ -212,7 +211,9 @@ $(document).ready(function() {
 
     $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 
-    $('#tblUsers').DataTable({}); //inicializa datatable
+    $('#tblUsers').DataTable({
+        
+    }); //inicializa datatable
     $(document).on('click', '.delete-modal', function() {
         var nombre = ($(this).data('name'));
         var resp = confirm("Desea eliminar a "+nombre);
@@ -243,12 +244,12 @@ $(document).ready(function() {
                 $("input[id=rut]").val(data.rut);
                 $("input[id=phone]").val(data.phone);
                 $("input[id=born]").val(data.born);
-                $("input[id=id_user]").val(data.id);
+                $("input[id=user_id]").val(data.id);
                 alert(data.id);
             },
             error: function (data) {
                 console.log('Error:', data);
-                alert("Ha ocurrido un error");
+                alert("Ha ocurrido un error"+data);
             }
         })
     });
@@ -264,6 +265,9 @@ $(document).ready(function() {
     });
 });
 
+
+
+
 $('#btn-save').click(function(){
     $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
     if ($("#userForm").length > 0) { //si los elementos del formulario > 0 valida
@@ -276,8 +280,52 @@ $('#btn-save').click(function(){
         var rut = $("input[id=rut]").val();
         var phone = $("input[id=phone]").val();
         var born = $("input[id=born]").val();
-        var id = $("input[id=id_user]").val();
-        $.ajax({
+        var id = $("input[id=user_id]").val();
+        // var url = "/almacenaUsuarios";
+        if (actionType == "create") {
+            $.ajax({
+            type:'POST',
+            url:'/almacenaUsuarios',
+            data:{id:id, name:name, password:password, email:email, last_name:last_name, rut:rut, phone:phone, born:born},
+            success: function (data) {
+                var user = '<tr class="user' + data.id + '"><td>' + data.rut + '</td><td>' + data.name + '</td><td>' + data.last_name + '</td><td>' + data.email + '</td><td>' + data.phone + '</td>';
+                user += '<td><button id="edit_user" data-id="' + data.id + '" data-name="' + data.name + '"><span class="edit-modal"></span> Edit</button>';
+                user += '<button id="btnEliminar" data-id="' + data.id + '" data-name="' + data.name + '" class="delete-modal"><span class=""></span>Delete</button></td></tr>'; 
+                if (actionType == "create") {
+                    $('#users-crud').append(user);
+                } else {
+                    $("#user" + data.id).replaceWith(user);
+                }
+                $('#userForm').trigger("reset");
+                $('#modal3').hide();
+                $('#btn-save').html('!Guardar Cambios');  
+            },
+            error: function (data) {
+                console.log('Error:', data);
+                alert("Ha ocurrido un error agregar"+data);                
+            }
+        });
+                } else {
+                    $.ajax({
+            type:'POST',
+            url:'/edicionUsuario',
+            data:{id:id, name:name, password:password, email:email, last_name:last_name, rut:rut, phone:phone, born:born},
+            success: function (data) {
+                var user = '<tr class="user' + data.id + '"><td>' + data.rut + '</td><td>' + data.name + '</td><td>' + data.last_name + '</td><td>' + data.email + '</td><td>' + data.phone + '</td>';
+                user += '<td><button id="edit_user" data-id="' + data.id + '" data-name="' + data.name + '"><span class="edit-modal"></span> Edit</button>';
+                user += '<button id="btnEliminar" data-id="' + data.id + '" data-name="' + data.name + '" class="delete-modal"><span class=""></span>Delete</button></td></tr>'; 
+                $("#user" + data.id).replaceWith(user);
+                $('#userForm').trigger("reset");
+                $('#modal3').hide();
+                $('#btn-save').html('!Guardar Cambios');  
+            },
+            error: function (data) {
+                console.log('Error:', data);
+                alert("Ha ocurrido un error edit"+data);                
+            }
+        });
+                }
+        /*$.ajax({
             type:'POST',
             url:'/almacenaUsuarios',
             data:{id:id, name:name, password:password, email:email, last_name:last_name, rut:rut, phone:phone, born:born},
@@ -298,7 +346,7 @@ $('#btn-save').click(function(){
                 console.log('Error:', data);
                 alert("Ha ocurrido un error");                
             }
-        });
+        });*/
     }
 });
 
@@ -317,6 +365,10 @@ function eliminarArticulo(id) {
             $(".user" + id).remove(); //elimina html(fila tr) por clase user+id
         }
     });
+}
+
+function actualizaUsuario(){
+
 }
 
 </script>
