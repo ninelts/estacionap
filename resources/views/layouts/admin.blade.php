@@ -81,23 +81,24 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-chart-line"></i>
-                                Ventas
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-list"></i>
-                                        Ver Todos
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-plus"></i>
-                                        Agregar Nuevo
-                                    </a>
-                                </li>
-                            </ul>
+                                <a href="{{route('listado_usuarios')}}">
+                                    <i class="fas fa-list"></i>
+                                    Ver Todos
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-list"></i>
+                                            Ver Todos
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-plus"></i>
+                                            Agregar Nuevo
+                                        </a>
+                                    </li>
+                                </ul>
                         </li>
                         <li>
                             <a href="#">
