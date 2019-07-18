@@ -37,10 +37,7 @@
       @auth
       <li><a href="sass.html">{{ Auth::user()->name }}</a></li>
       <li>
-  <form id="logout-form" action="{{ route('logout') }}" method="POST">
-       @csrf
-  <li><a href="#!"><input class="waves-effect btn-salir" type="submit" name="Salir" value="Cerrar Sesión"></a></li>
-  </form>
+        <a href="{{route('logout')}}">Chupeta</a>
   </li>
       @endauth  
    </ul>
