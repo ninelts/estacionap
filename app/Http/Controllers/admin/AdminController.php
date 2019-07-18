@@ -13,9 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-
+  
     public function index(Request $request) //**verifica el rol para mostrar la vista de administrador */
     {
         $request->user()->authorizeRoles(['admin']); //**verifica el rol para mostrar la vista de administrador */
