@@ -15,11 +15,17 @@ class AdminController extends Controller
 {
     public function __construct()
     {
+<<<<<<< HEAD
         //Middleware
         $this->middleware(['auth','verified']);
     }
 
     public function index(Request $request)
+=======
+        $this->middleware(['auth','verified']);  //Middleware    }
+}
+    public function index(Request $request) //**verifica el rol para mostrar la vista de administrador */
+>>>>>>> reserv
     {
         $request->user()->authorizeRoles(['admin']); //**verifica el rol para mostrar la vista de administrador */
         return view('estacionapp.administrador.administrador');
