@@ -65,11 +65,9 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/agregarUsuarios', 'admin\CrudUserController@formAgregarUsuario')->name('agregar_usuarios');
 
     //**ELIMINA USUARIO*/
-<<<<<<< HEAD
-    Route::post('/eliminaUsuarios', 'admin\CrudUserController@deleteUsers')->name('eliminar_usuarios');
-=======
+
     Route::post('/eliminaUsuarios', 'admin\CrudUserController@deleteUsers')->name('eliminar_usuarios'); 
->>>>>>> 2f8ff5a7fabe68f37328602b6c060bec2be5f734
+
 
 
     //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
@@ -92,5 +90,3 @@ Route::middleware(['auth','verified'])->group(function () {
         return view('estacionapp.session.recepcion.lectorQr');
     })->name('scanner');
 });
-
-Auth::routes(['verify' => true]);
