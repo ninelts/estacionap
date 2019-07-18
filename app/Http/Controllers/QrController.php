@@ -55,7 +55,7 @@ class QrController extends Controller
           $state_reserve = ReserveState::all()->where('id_reservestate' ,$id_reservestate)->first()->name_reservestate;
 
 
-        return response()->json(['message' => 'Su Reserva esta :'.$state_reserve  ]);
+        return response()->json(['message' => 'Su Reserva esta :  '.$state_reserve  ]);
     }else{
         return redirect::route('/');
     }

@@ -70,7 +70,7 @@
 
     scanner.addListener('scan', content => {
       scanner.stop();
-      document.getElementById("ver").innerHTML = content;
+      // document.getElementById("ver").innerHTML = content;
 
       $(document).ready(function(){
   /* In laravel you have to pass this CSRF in meta for ajax request  */
@@ -96,8 +96,8 @@
    },
 
    success:function(message){
-
-    alert(message.message);
+  var toastHTML = '<span class="center">'+message.message+'</span><button class="btn-flat toast-action">Undo</button>';
+  M.toast({html: toastHTML});
   },
   error:function(data){
     alert('Error');
