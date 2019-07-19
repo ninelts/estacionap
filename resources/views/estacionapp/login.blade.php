@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row">
         <form class="col s12" action="{{route('login')}}" method="POST">
+        @csrf
             <h1>Iniciar Sesion</h1>
             @if(session('status'))
                 <div class="card-error red lighten-2">
@@ -12,7 +13,7 @@
                     <p class="center">{{session('status2')}}</p>
                     </div>
                 </div>
-            @endif
+            @endif 
             <div class="row inicio-sesion">
 
                 <div class="input-field col s12">
