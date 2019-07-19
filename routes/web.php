@@ -53,20 +53,47 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('datosUsuario', 'user\UserController@dateUser')->name('datosUsuario');
     Route::get('Registro/Automovil', 'user\RegisterCarController@index')->name('registro_automovil');
 
+
+
+
+
+
     //**ADMINISTRACION */
 
+    /*CRUD RESERVE*/
+    Route::get('/listadoReservas', 'admin\CrudReserveController@index')->name('listado_reservas');
+
+    //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
+    Route::post('/editaReservas', 'admin\CrudReserveController@editReserves')->name('editar_reservas');
+
+    //**el jquery se encarga de traer de getUser las variables a mostrar */
+    Route::get('/dtbl.reserves', 'admin\CrudReserveController@getReserves')->name('datatable.reserves');
+    
+    //**genera el pdf en base a la vista reporteUsuario.blade */
+    Route::get('/pdf.reserves', 'admin\CrudReserveController@pdfReserves')->name('pdf.reserves');
+
+    /**genera el excel en base al modelo User */
+    Route::get('/xlsx.reserves', 'admin\CrudReserveController@xlsxExport')->name('xlsx.reserves');
+
+
+
+
+
+    /*CRUD USER*/
 
     Route::get('/administracion', 'admin\AdminController@index')->name('administracion');
     
-    //**muestra listado usuarios */
+    //**muestra listado usuarios ACTIVOS */
     Route::get('/listadoUsuarios', 'admin\CrudUserController@index')->name('listado_usuarios');
+
+    //**muestra listado usuarios INACTIVOS */
+    Route::get('/listadoUsuariosInactivos', 'admin\CrudUserController@indexDesactivados')->name('listado_usuarios_desactivados');
 
     //** MUESTRA formulario agregar usuarios CAMBIAR NOMBRE DE FUNCION */
     Route::get('/agregarUsuarios', 'admin\CrudUserController@formAgregarUsuario')->name('agregar_usuarios');
 
     //**ELIMINA USUARIO*/
     Route::post('/eliminaUsuarios', 'admin\CrudUserController@deleteUsers')->name('eliminar_usuarios');
-
 
 
     //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
@@ -77,7 +104,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/edicionUsuario', 'admin\CrudUserController@editeUser')->name('edita_usuario');
 
 
-    Route::post('/ajaxQR','QrController@read')->name('ajaxQR');
+    Route::post('/ajaxQR', 'QrController@read')->name('ajaxQR');
 
 
     //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/

@@ -10,10 +10,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 
-
-
-
-
 <div class="container">
     <h3>Listado usuarios</h3>
     <table id="tblUsers" class="cell-border compact stripe">
@@ -50,9 +46,9 @@
                         data-name="{{$user->name}}">
                         create
                     </i>
-                    <i id="btnEliminar" class="delete-modal material-icons" style="color:#E2676D;"
+                    <i id="btnEliminar" class="delete-modal material-icons" style="color:#54B3EC;"
                         data-id="{{$user->id}}" data-name="{{$user->name}}">
-                        delete_sweep
+                        beenhere
                     </i>
                 </td>
             </tr>
@@ -222,7 +218,7 @@
     $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 
     /* INICIALIZAR DATATABLE */
-    $('#tblUsers').DataTable({});
+    /* $('#tblUsers').DataTable({}); */
 
     /* BOTÓN ELIMINAR USUARIO */
     $(document).on('click', '.delete-modal', function() {
@@ -305,7 +301,7 @@
                 success: function (data) {
                     var user = '<tr class="user' + data.id + '"><td>' + data.rut + '</td><td>' + data.name + '</td><td>' + data.last_name + '</td><td>' + data.email + '</td><td>' + data.phone + '</td>';
                     user += '<td><i id="edit_user" class="edit-modal material-icons" style="color:#F9CC01;" data-id="' + data.id + '" data-name="' + data.name + '">create</i>';
-                    user += '<i id="btnEliminar" class="delete-modal material-icons" style="color:#E2676D;" data-id="' + data.id + '" data-name="' + data.name + '">delete_sweep</i></td></tr>';
+                    user += '<i id="btnEliminar" class="delete-modal material-icons" style="color:#54B3EC;" data-id="' + data.id + '" data-name="' + data.name + '">beenhere</i></td></tr>';
                     $('#users-crud').append(user);
                     $('#userForm').trigger("reset");
                     $('#modal3').hide();
@@ -324,7 +320,7 @@
             success: function (data) {
                 var user = '<tr class="user' + data.id + '"><td>' + data.rut + '</td><td>' + data.name + '</td><td>' + data.last_name + '</td><td>' + data.email + '</td><td>' + data.phone + '</td>';
                     user += '<td><i id="edit_user" class="edit-modal material-icons" style="color:#F9CC01;" data-id="' + data.id + '" data-name="' + data.name + '">create</i>';
-                    user += '<i id="btnEliminar" class="delete-modal material-icons" style="color:#E2676D;" data-id="' + data.id + '" data-name="' + data.name + '">delete_sweep</i></td></tr>';
+                    user += '<i id="btnEliminar" class="delete-modal material-icons" style="color:#54B3EC;" data-id="' + data.id + '" data-name="' + data.name + '">beenhere</i></td></tr>';
                     alert(user);
                     $('.user' + data.id).replaceWith(user);
                     $('#userForm').trigger("reset");

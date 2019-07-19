@@ -22,69 +22,25 @@ class CrudUserController extends Controller
         $this->middleware(['auth','verified']);
     }
 
-    //**********************************************READ ******************************************************/
+    /* READ USUARIOS ACTIVOS*/
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['admin']);
-        // return view('estacionapp.administrador.listaUsuarios');
-        // $users = User::select(['rut','name','last_name','email','phone']);
-        $users = DB::table('users')->get();
-        // dd($users);
+        $users = DB::table('users')->where('id_stateuser', 0)->get();
         return view('estacionapp.administrador.listaUsuarios', ['users' => $users]);
     }
-    // public function getUsers() //**trae las variables a mostrar en reporte */
-    // {
-    //     $users = User::select(['rut','name','last_name','email','phone']);
-    //     return Datatables::of($users)->make(true);
-    // }
-    public function getUsers(Request $request) //**trae las variables a mostrar en reporte */
-    {
-        // $users = User::select(['rut','name','last_name','email','phone']);
-        // return view('estacionapp.administrador.listaUsuarios', ['users' => $users]);
-    }
 
-
-
-
-
-
-
-    
-    //**********************************************READ ******************************************************/
-
-    //**********************************************CREATE ******************************************************/
-    public function formAgregarUsuario(Request $request)
+    /* READ USUARIOS INACTIVOS*/
+    public function indexDesactivados(Request $request)
     {
         $request->user()->authorizeRoles(['admin']);
-        return view('estacionapp.administrador.agregarUsuarios');
+        $users = DB::table('users')->where('id_stateuser', 1)->get();
+        return view('estacionapp.administrador.listaUsuarios', ['users' => $users]);
     }
-    // public function addUsers(Request $request)
-    // {
-    //     $request->user()->authorizeRoles(['admin']);
 
-
-    //     $user = new User();
-    //     $user->rut = $request->input('rut');
-    //     $user->name = $request->input('txtNombre');
-    //     $user->last_name   = $request->input('txtApellido');
-    //     $user->password   = $request->input('password');
-    //     $user->email   = $request->input('email');
-    //     $user->phone   = $request->input('txtTelefono');
-    //     $user->born   = $request->input('txtNacimiento');
-    //     $user->save();
-    //     return view('estacionapp.administrador.listaUsuarios');
-    //     // $datosUsuario=request()->all();
-    //     // $datosUsuario=request()->except('_token','action');
-    //     // dd($datosUsuario);
-    //     // User::insert($datosUsuario);
-    //     // return response()->json($datosUsuario);
-    //     // return view('estacionapp.administrador.listaUsuarios');
-    // }
-
-
-
-    public function editeUser(Request $request){
-
+    /* UPDATE USUARIOS*/
+    public function editeUser(Request $request)
+    {
         $user = User::find($request->id);
         dump($user);
         $user->name = $request->name;
@@ -95,55 +51,12 @@ class CrudUserController extends Controller
         $user->rut = $request->rut;
         $user->password = Hash::make($request->password);
         $user->save();
-        // $success_output = '<div class="alert alert-success">Data Updated</div>';
         return response()->json($user);
-
     }
 
+    /*GUARDA USUARIO NUEVO O MODIFICACIÓN*/
     public function storeUsers(Request $request)
     {
-        //$userId = $request->id;
-        // dump($request->id);
-        // $role = Role::where('name', 'user')->first();
-        // $user   =   User::updateOrCreate(
-        //     ['id' => $request->id],
-        //     ['name' => $request->name,
-        //      'email' => $request->email,
-        //      'rut' => $request->rut,
-        //      'last_name' => $request->last_name,
-        //      'password' => Hash::make($request->password),
-        //      'phone' => $request->phone,
-        //      'born' => $request->born
-        //      ]);
-        // dump($user);
-
-
-
-        // if($request->get('button_action') == 'insert')
-        // {
-        //     $student = new Student([
-        //         'first_name'    =>  $request->get('first_name'),
-        //         'last_name'     =>  $request->get('last_name')
-        //     ]);
-        //     $student->save();
-        //     $success_output = '<div class="alert alert-success">Data Inserted</div>';
-        // }
-
-        // if($request->get('button_action') == 'update')
-        // {
-        //     $student = Student::find($request->get('student_id'));
-        //     $student->first_name = $request->get('first_name');
-        //     $student->last_name = $request->get('last_name');
-        //     $student->save();
-        //     $success_output = '<div class="alert alert-success">Data Updated</div>';
-        // }
-
-
-
-
-
-
-        dump($request->id);
         $role = Role::where('name', 'user')->first();
         $user   =   User::updateOrCreate(
             ['id' => $request->id],
@@ -154,29 +67,15 @@ class CrudUserController extends Controller
                      'password' => Hash::make($request->password),
                      'phone' => $request->phone,
                      'born' => $request->born
-                     ]                   
+                     ]
         );
         dump($user);
         $user->roles()->attach($role);  //Funcion para Agregar el rol y el id del usuario en la tabla pivote o muchos a muchos
-
-
-        // $user->save();
-        // $user   =   User::updateOrCreate(['id' => $userId],
-        //             ['name' => $request->name,
-        //              'email' => $request->email,
-        //              'rut' => $request->rut,
-        //              'last_name' => $request->last_name,
-        //              'password' => $request->password,
-        //              'phone' => $request->phone,
-        //              'born' => $request->born,
-        //              ]);
         dump($user);
-        
         return response()->json($user);
     }
-    //**********************************************CREATE ******************************************************/
 
-    //**********************************************EDITAR ******************************************************/
+    /* CARGA DATOS USUARIOS PARA UPDATE */
     public function editUsers(Request $request)
     {
         $user = User::find($request->id);
@@ -191,26 +90,19 @@ class CrudUserController extends Controller
         );
         dump($output);
         return response()->json($output);
-
-        // $id = $request->input('id');
-        // $user = user::find($id);
-        // $output = array(
-        //     'first_name'    =>  $user->first_name,
-        //     'last_name'     =>  $user->last_name
-        // );
-        // echo json_encode($output);
-
-        
-        // $where = array('id' => $request);
-        // $user  = User::where($where)->first();
-        // dump($user);
-        // return response()->json($user);
     }
-    //**********************************************EDITAR ******************************************************/
 
     public function deleteUsers(Request $request)
     {
-        $delete = User::find($request->id);
+        $disable = User::find($request->id);
+        // $rol = DB::table('role_user')->where('user_id', $disable->id)->get('id');
+        // $rol_user = $rol->id;
+        // $request->get('your_id');
+        // dump($rol);
+        $disable->id_stateuser = 1;
+        $disable->save();
+        DB::table('role_user')->where('user_id', $request->id)->delete();
+        dump($disable);
         // User::find($request->id)->delete();
         return response()->json();
     }

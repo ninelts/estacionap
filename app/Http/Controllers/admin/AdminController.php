@@ -13,10 +13,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
-  //elimine
+    //elimine
     public function index(Request $request) //**verifica el rol para mostrar la vista de administrador */
     {
         $request->user()->authorizeRoles(['admin']); //**verifica el rol para mostrar la vista de administrador */
+        // $seats = DB::table('seat')>groupBy('id')->get();
         return view('estacionapp.administrador.administrador');
     }
 }

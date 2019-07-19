@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/b-1.5.6/b-flash-1.5.6/datatables.min.css" />
+
+    {{--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+ --}}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body>
@@ -59,86 +64,44 @@
                     <h2>Menú de Administración</h2>
                     <ul class="menu">
                         <li>
-                            <a href="#">
-                                <i class="fas fa-address-book"></i>
-                                Clientes
+                            <a href="{{route('administracion')}}">
+                                <i class="fas fa-chart-bar"></i>
+                                Recinto
                             </a>
-
-                            <ul>
-                                <li>
-                                    <a href="{{route('listado_usuarios')}}">
-                                        <i class="fas fa-list"></i>
-                                        Ver Todos
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{route('agregar_usuarios')}}">
-                                        <i class="fas fa-plus"></i>
-                                        Agregar Nuevo
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li>
-                            <a href="#">
-                                <a href="{{route('listado_usuarios')}}">
-                                    <i class="fas fa-list"></i>
-                                    Ver Todos
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fas fa-list"></i>
-                                            Ver Todos
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fas fa-plus"></i>
-                                            Agregar Nuevo
-                                        </a>
-                                    </li>
-                                </ul>
                             <a href="{{route('listado_usuarios')}}">
-                                        <i class="fas fa-list"></i>
-                                        Ver Todos
-                                    </a>
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-list"></i>
-                                        Ver Todos
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-plus"></i>
-                                        Agregar Nuevo
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-box"></i>
-                                Inventario
+                                <i class="fas fa-address-book"></i>
+                                Usuarios
                             </a>
                             <ul>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{route('listado_usuarios_desactivados')}}">
                                         <i class="fas fa-list"></i>
-                                        Ver Todos
+                                        Inactivos
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-plus"></i>
-                                        Agregar Nuevo
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
+                                {{-- <li>
+                                    <a href="{{route('agregar_usuarios')}}">
+                                <i class="fas fa-plus"></i>
+                                Agregar Nuevo
+                                </a>
+                        </li> --}}
+                    </ul>
+                    </li>
+                    <li>
+                        <a href="{{route('listado_reservas')}}">
+                            <i class="fas fa-calendar-alt"></i>
+                            Reservas
+                        </a>
+                    </li>
+                    <li>
+                        <a {{-- href="{{route('listado_tarifas')}}" --}}>
+                            <i class="fas fa-chart-line"></i>
+                            Tarifas
+                        </a>
+                    </li>
+                    {{-- <li>
                             <a href="#">
                                 <i class="fas fa-file-alt"></i>
                                 Facturas
@@ -183,7 +146,7 @@
                                 <i class="fas fa-pencil-alt"></i>
                                 Editar Perfil
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </aside>
@@ -194,6 +157,16 @@
             <script type="text/javascript"
                 src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/b-1.5.6/b-flash-1.5.6/datatables.min.js">
             </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+            {{-- lista reserva  bootstrap --}}
+            {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> --}}
+
+
 </body>
 
 </html>
