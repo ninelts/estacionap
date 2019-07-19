@@ -239,7 +239,7 @@
     $('body').on('click', '.edit-modal', function () {
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
         var id = ($(this).data('id'));
-        alert("se envía id "+id);
+        // alert("se envía id "+id);
         $('#userCrudModal').html("Editar Usuario");
         $('#btn-save').val("edit-user");
         $('#btn-save').html('Actualizar');
@@ -257,11 +257,11 @@
                 $("input[id=phone]").val(data.phone);
                 $("input[id=born]").val(data.born);
                 $("input[id=user_id]").val(data.id);
-                alert(data.id);
+                // alert(data.id);
             },
             error: function (data) {
                 console.log('Error:', data);
-                alert("Ha ocurrido un error"+data);
+                alert("Ha ocurrido un error al cargar "+data);
             }
         })
     });
@@ -313,7 +313,7 @@
                 },
                 error: function (data) {
                     console.log('Error:', data);
-                    alert("Ha ocurrido un error agregar"+data);
+                    alert("Ha ocurrido un error agregar "+data);
                 }
             });
         }else {
@@ -325,7 +325,7 @@
                 var user = '<tr class="user' + data.id + '"><td>' + data.rut + '</td><td>' + data.name + '</td><td>' + data.last_name + '</td><td>' + data.email + '</td><td>' + data.phone + '</td>';
                     user += '<td><i id="edit_user" class="edit-modal material-icons" style="color:#F9CC01;" data-id="' + data.id + '" data-name="' + data.name + '">create</i>';
                     user += '<i id="btnEliminar" class="delete-modal material-icons" style="color:#E2676D;" data-id="' + data.id + '" data-name="' + data.name + '">delete_sweep</i></td></tr>';
-                    alert(user);
+                    // alert(user);
                     $('.user' + data.id).replaceWith(user);
                     $('#userForm').trigger("reset");
                     $('#modal3').hide();
@@ -333,7 +333,7 @@
                 },
                 error: function (data) {
                     console.log('Error:', data);
-                    alert("Ha ocurrido un error edit"+data);
+                    alert("Ha ocurrido un error al actualizar "+data);
                 }
             });
         }
