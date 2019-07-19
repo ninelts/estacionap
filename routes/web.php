@@ -97,3 +97,8 @@ Route::middleware(['auth','verified'])->group(function () {
         return view('estacionapp.session.recepcion.lectorQr');
     })->name('scanner');
 });
+
+
+Route::get('ajaxValidator', 'Auth\RegisterController@validator')->name('validator');
+
+
