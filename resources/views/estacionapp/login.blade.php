@@ -4,7 +4,6 @@
 <div class="container">
     <div class="row">
         <form class="col s12" action="{{route('login')}}" method="POST">
-        @csrf
             <h1>Iniciar Sesion</h1>
             @if(session('status'))
                 <div class="card-error red lighten-2">
