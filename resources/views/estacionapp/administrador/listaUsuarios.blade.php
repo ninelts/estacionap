@@ -228,7 +228,7 @@
     $(document).on('click', '.delete-modal', function() {
         var nombre = ($(this).data('name'));
         var id = ($(this).data('id'));
-        var resp = confirm("Desea desactivar a "+nombre+ "con id "+ id);
+        var resp = confirm("¿ Desea desactivar a "+nombre+ " ?");
         if (resp == true) {
             desactivarUsuario(id);
             } else{

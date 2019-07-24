@@ -37,7 +37,7 @@
       @auth
       <li><a href="sass.html">{{ Auth::user()->name }}</a></li>
       <li>
-        <a href="{{route('logout')}}">Chupeta</a>
+        <a href="{{route('logout')}}">Cerrar Session</a>
   </li>
       @endauth  
    </ul>
