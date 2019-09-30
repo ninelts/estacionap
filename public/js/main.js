@@ -16,16 +16,6 @@ function cancelarEditar() {
     document.getElementById('txtCorreo').contentEditable = false;
     location.reload();
 }
-
-$(document).ready(function() {
-    $('input.autocomplete').autocomplete({
-        data: {
-            "Apple": null,
-            "Microsoft": null,
-            "Google": 'https://placehold.it/250x250'
-        },
-    });
-});
 document.addEventListener('DOMContentLoaded', function() {
     var btnFloat = document.querySelectorAll('.fixed-action-btn');
     var instances = M.FloatingActionButton.init(btnFloat, {
@@ -33,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hoverEnabled: false
     });
 });
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', function() {
     var rDiaria = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(rDiaria);
@@ -55,3 +46,5 @@ document.addEventListener("DOMContentLoaded", event => {
     });
 
 });
+=======
+>>>>>>> 6cc7bd29cbaa3d036aeddd0979f57af29b5eeb5f

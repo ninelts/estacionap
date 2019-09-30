@@ -65,7 +65,7 @@ class RegisterController extends Controller
         
         'txtNombre.alpha'           =>'El campo nombre solo puede contener letras',
         'txtNombre.required'        =>'El campo nombre es obligatorio',
-        'txtNombre.min'             =>'El campo nombre debe contener 4 letras como minimo',
+        'txtNombre.min'             =>'El campo nombre debe contener 3 letras como minimo',
 
         'txtApellido.required'      =>'El campo apellido es obligatorio',
         'txtApellido.alpha'         =>'El campo apellido solo puede contener letras',
@@ -87,18 +87,18 @@ class RegisterController extends Controller
     ); 
 
     return Validator::make($data, [
-        'rut' => ['required', 'string', 'min:8','unique:users'],
-        'txtNombre' => ['required', 'alpha', 'max:255'],
+        'rut' => ['required', 'string', 'min:9','unique:users'],
+        'txtNombre' => ['required', 'alpha', 'max:16' ,'min:3'],
         'txtApellido' => ['required', 'alpha', 'min:4'],
         'txtTelefono' => ['required', 'numeric', 'digits_between:9,9'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'txtNacimiento' => ['required'],
         'password' => ['required', 
         'min:6', 
-        'regex:"^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$"', 
+        'regex:"^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$"', 
         'confirmed']
         ,
-    ], $messages);
+    ]/*, $messages*/);
 }
 
     /**

@@ -14,8 +14,9 @@
 Auth::routes(['verify' => true]);
 
 /*RUTAS SIN SESSION*/
-Route::middleware(['guest'])->group(function () {
 
+    //
+Route::middleware(['guest'])->group(function () {
     Route::get('/', 'guest\GuestController@start')->name('inicio');
     Route::get('/login', 'guest\GuestController@login')->name('login');
     Route::get('/registro', 'Auth\RegisterController@index')->name('registro');
@@ -28,9 +29,8 @@ Route::middleware(['guest'])->group(function () {
 /*RUTAS CON SESSION*/
 
 Route::middleware(['auth','verified'])->group(function () {
-
     Route::get('/roles', 'RolesController@index')->name('roles');
-
+    Route::get('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/conductor', 'conductorController@index')->name('conductor');
     Route::get('/recepcion', 'RecepcionController@index')->name('recepcion');
 
@@ -41,28 +41,64 @@ Route::middleware(['auth','verified'])->group(function () {
 
     /*RESERVA DIARIA*/
 
-    Route::get('/diaria','reserves\DayliController@index')->name('vdiaria');
+    Route::get('/diaria', 'reserves\DayliController@index')->name('vdiaria');
     Route::post('/diarias/', 'reserves\DayliController@create')->name('cdiaria');
 
     /*RESERVA MENSUAL*/
 
-    Route::get('reserva','user\UserController@reservation')->name('reserva');         
-    Route::get('/misreservas','user\UserController@myReservation')->name('misreservas');
+
+    //**CONDUCTOR */
+    Route::get('reserva', 'user\UserController@reservation')->name('reserva');
+    Route::get('/misreservas', 'user\UserController@myReservation')->name('misreservas');
     Route::get('datosUsuario', 'user\UserController@dateUser')->name('datosUsuario');
+    Route::get('Registro/Automovil', 'user\RegisterCarController@index')->name('registro_automovil');
+
+    //**ADMINISTRACION */
 
 
-    Route::get('/administracion', 'AdminController@index')->name('administracion'); 
+    Route::get('/administracion', 'admin\AdminController@index')->name('administracion');
+    
+    //**muestra listado usuarios */
+    Route::get('/listadoUsuarios', 'admin\CrudUserController@index')->name('listado_usuarios');
+
+    //** MUESTRA formulario agregar usuarios CAMBIAR NOMBRE DE FUNCION */
+    Route::get('/agregarUsuarios', 'admin\CrudUserController@formAgregarUsuario')->name('agregar_usuarios');
+
+    //**ELIMINA USUARIO*/
+    Route::post('/eliminaUsuarios', 'admin\CrudUserController@deleteUsers')->name('eliminar_usuarios');
+
+
+
+    //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
+    Route::post('/almacenaUsuarios', 'admin\CrudUserController@storeUsers')->name('almacenar_usuarios');
+
+
+    //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
+    Route::post('/edicionUsuario', 'admin\CrudUserController@editeUser')->name('edita_usuario');
+
+
+    Route::post('/ajaxQR','QrController@read')->name('ajaxQR');
+
+
+    //**almacena usuarios CAMBIAR NOMBRE DE FUNCION*/
+    Route::post('/editaUsuarios', 'admin\CrudUserController@editUsers')->name('editar_usuarios');
+
     //**el jquery se encarga de traer de getUser las variables a mostrar */
-    Route::get('/dtbl.users', 'AdminController@getUsers')->name('datatable.users');
+    Route::get('/dtbl.users', 'admin\CrudUserController@getUsers')->name('datatable.users');
+    
     //**genera el pdf en base a la vista reporteUsuario.blade */
-    Route::get('/pdf.users','AdminController@pdfUsers')->name('pdf.users'); 
+    Route::get('/pdf.users', 'admin\CrudUserController@pdfUsers')->name('pdf.users');
+
     /**genera el excel en base al modelo User */
-    Route::get('/xlsx.users','AdminController@xlsxExport')->name('xlsx.users'); 
+    Route::get('/xlsx.users', 'admin\CrudUserController@xlsxExport')->name('xlsx.users');
 
-
-    Route::get('scanner', function() {return view('estacionapp.session.recepcion.lectorQr');})->name('scanner');
-
-    Route::get('Registro/Automovil', 'user\RegisterCarController@index')->name('registro_automovil'); 
-    Route::get('/lala', 'reserves\ExpressController@validates');
-
+    //**RECEPCION */
+    Route::get('scanner', function () {
+        return view('estacionapp.session.recepcion.lectorQr');
+    })->name('scanner');
 });
+
+
+Route::get('ajaxValidator', 'Auth\RegisterController@validator')->name('validator');
+
+
