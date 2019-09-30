@@ -14,12 +14,12 @@
    </div>
    @endif
 
-<<<<<<< HEAD
+
 
 <form class="formulario" action="{{route('register')}}" method="POST">
-=======
+
    <form action="{{route('register')}}" method="POST">
->>>>>>> 6cc7bd29cbaa3d036aeddd0979f57af29b5eeb5f
+
 
     @csrf
     <h4>Registro Conductor</h4>
