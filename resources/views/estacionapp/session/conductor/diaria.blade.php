@@ -4,6 +4,10 @@
 @section('content')
 <a href="{{route('conductor')}}" class="back-page left"><i class="fas fa-arrow-left"></i></a>
 <h1>Lista de plazas</h1>
+@if(session('status'))
+    <h5 class="center">{{session('status')}}</h5>
+@endif
+<h5></h5>
     <table class="">
         <thead>
             <tr>
@@ -39,7 +43,7 @@
                 </td>
                 <td>
                     <input name="plaza[{{$plaza->id_seat}}]" type="text" style="display: none;" value='{{$plaza->id_seat}}'>
-                    <input id="fecha_reserva" type="date" name="dateFechaReserva[{{$loop->iteration}}]" class="validate">
+                    <input id="fecha_reserva" type="date" name="dateFechaReserva[{{$loop->iteration}}]" class="validate" >
                     <label for="fecha_reserva">Fecha Reserva</label>
                 </td>
                 <td><input class="boton btn-registro" type="submit" value="Reservar">  </td>

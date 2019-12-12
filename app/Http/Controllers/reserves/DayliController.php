@@ -13,17 +13,17 @@ use App\Http\Controllers\ReservationController;
 
 class DayliController extends Controller
 {
-   public function __construct()
-   {
+   public function __construct(){
         $this->middleware(['auth','verified']); 	   //Middleware
      // Se llama a la funcion AuthorizeRoles , quien esta le envia los roles a comparar
     }
 
 
-    public function index (){
+    public function index (Request $request){
 
+       $request->user()->authorizeRoles(['user']);
     	$plaza = Seat::all();
-    	
+    	$carbon = Carbon::now();
     	return view('estacionapp.session.conductor.diaria')->with('plazas' , $plaza);
 
     }
@@ -39,21 +39,25 @@ class DayliController extends Controller
 
         foreach ($request->input('plaza') as $array2 ) {
 
-              $id_seat = $array2;
+              $id_seat = $array2; // Traemos la plaza obtenida
         }
 
-
-        $cont = Seat::All()->count();   
-        $fecha2 = strftime($fecha1);
-        $DateTime = new DateTime($fecha2);
-        $expiration =  Carbon::instance($DateTime)->addHours(21);//Tiempo limite de expiracion;
-
-		$tarifa = Tariff::where('id_tariff', 2)->first()->id_tariff;   // Tipo de Tarifa
-		$tiporeserva = ReserveType::where('id_reservetype', 2)->first()->id_reservetype; 
-		$plazadisponible = Seat::where('id_seat', $id_seat )->first()->id_seat;
-		$reserve = new ReservationController();
+        if ($fecha1 >= Carbon::now()) {
+        $DateTime = new DateTime($fecha1); // Se Setea fecha a DateTime
+        $activate_reserve = $DateTime;   //  Capturamos Fecha de Reserva
+        $expiration =  Carbon::instance($DateTime)->addHours(21);//Tiempo limite de la expiracion 9:00 pm ;
+        $tarifa = Tariff::where('id_tariff', 2)->first()->id_tariff;   // Tipo de Tarifa
+        $tiporeserva = ReserveType::where('id_reservetype', 2)->first()->id_reservetype; 
+        $plazadisponible = Seat::where('id_seat', $id_seat )->first()->id_seat;
+        $reserve = new ReservationController();
+        $id_reservetype = 2;
         $state_seat = Seat::where('id_seat', $plazadisponible)->first()->state_seat;
-		return $reserve->create($expiration , $tarifa , $tiporeserva , $plazadisponible ,$state_seat); // Retorna a ReservationController
+
+        return $reserve->createDayli($expiration , $tarifa , $tiporeserva , $plazadisponible , $activate_reserve , $id_reservetype); // Retorna a ReservationController
+}else {
+        return redirect()->back()->with('status', 'La Fecha ingresada es incorrecta');
+}
+
 	}
 
 
@@ -63,7 +67,7 @@ class DayliController extends Controller
         $carbon = Carbon::now();
         
         //Consulta en la db si la fecha actual es mayor a la fecha de expiracion , omite las reservas activas con valor 0 , y consulta que el tipo de reserva sea express 
-        $query = Reserve::all()->where('expiration_reserve', '<' , Carbon::now())->where('id_reservetype', 2)->whereNotIn('activate_reserve', [0]);   
+        $query = Reserve::all()->where('expiration_reserve', '<' , Carbon::now())->where('id_reservetype', 2);   
 
         //Recorre un arreglo para traer todas las consultas que tengan el formato de la query
         foreach ($query as $query_result ) {  
@@ -74,7 +78,7 @@ class DayliController extends Controller
 
 
                 /*Actualiza  la activacion de la reserva*/
-                Reserve::where('id_reserve' , $query_result->id_reserve)->update(['activate_reserve' => 0]); 
+               // Reserve::where('id_reserve' , $query_result->id_reserve)->update(['activate_reserve' => 0]); 
 
 
                  //Se Cambia el estado de la plaza

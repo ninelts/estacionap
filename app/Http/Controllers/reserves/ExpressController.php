@@ -25,14 +25,15 @@ class ExpressController extends Controller
 
 	public function create(){  //Reserva Express
 
-		$plaza = Seat::where('state_seat', 0)->get();
+
 		$expiration = Carbon::now()->addMinutes(10);  //Tiempo limite de expiracion
 		$tarifa = Tariff::where('id_tariff', 1)->first()->id_tariff;   // Tipo de Tarifa
 		$tiporeserva = ReserveType::where('id_reservetype', 1)->first()->id_reservetype; 
 		$plazadisponible = Seat::where('state_seat', 0)->first()->id_seat;
-
+		$activate_reserve = Carbon::now();
+		$id_reservetype = 1;
 		$reserve = new ReservationController();
-		return $reserve->create($expiration , $tarifa , $tiporeserva , $plazadisponible , $plaza); // Retorna a ReservationController
+		return $reserve->createExpress($expiration , $tarifa , $tiporeserva , $plazadisponible , $activate_reserve , $id_reservetype ); // Retorna a ReservationController
 	}
 
 
@@ -42,7 +43,7 @@ class ExpressController extends Controller
 		$carbon = Carbon::now();
 		
 		//Consulta en la db si la fecha actual es mayor a la fecha de expiracion , omite las reservas activas con valor 0 , y consulta que el tipo de reserva sea express 
-		$query = Reserve::all()->where('expiration_reserve', '<' , Carbon::now())->where('id_reservetype', 1)->whereNotIn('activate_reserve', [0]);   
+		$query = Reserve::all()->where('expiration_reserve', '<' , Carbon::now())->where('id_reservetype', 1);   
 
 		//Recorre un arreglo para traer todas las consultas que tengan el formato de la query
 		foreach ($query as $query_result ) {  
@@ -53,7 +54,7 @@ class ExpressController extends Controller
 
 
 				/*Actualiza  la activacion de la reserva*/
-				Reserve::where('id_reserve' , $query_result->id_reserve)->update(['activate_reserve' => 0]); 
+				//Reserve::where('id_reserve' , $query_result->id_reserve)->update(['activate_reserve' => 0]); 
 
 
 				 //Se Cambia el estado de la plaza
